@@ -26,3 +26,10 @@ export const offerType = PropTypes.shape({
   reviews: PropTypes.arrayOf(reviewType),
 });
 
+export const cityType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  coord: coordType,
+  id: PropTypes.number.isRequired,
+
+});
+
