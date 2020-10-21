@@ -1,7 +1,7 @@
-import offers from "./mock/offers";
-import cities from "./mocks/cities";
-import ActionType from "./action";
-import ActionCreator from "./action";
+import {offers} from "./mock/offers";
+import cities from "./mock/cities";
+import {ActionType} from "./action";
+import {ActionCreator} from "./action";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
