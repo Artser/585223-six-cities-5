@@ -59,7 +59,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentCityAsActive: (id) => () => dispatch(ActionCreator.setActiveCity(id))
+  setCurrentCityAsActive: (id) => (evt) => {
+    evt.preventDefault();
+    dispatch(ActionCreator.setActiveCity(id));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

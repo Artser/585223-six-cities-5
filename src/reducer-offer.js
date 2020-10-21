@@ -1,4 +1,4 @@
-import {offers} from "./mock/offers";
+import offers from "./mock/offers";
 import cities from "./mock/cities";
 import {ActionType} from "./action";
 import {ActionCreator} from "./action";

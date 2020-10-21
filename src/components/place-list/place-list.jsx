@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import CardPlace from "./card-place";
 import {offerType} from "../../types";
-// import {connect} from "react-redux";
 
 class PlaceList extends PureComponent {
   constructor(props) {
