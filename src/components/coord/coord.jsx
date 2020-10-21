@@ -1,22 +1,19 @@
 import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
+import {coordType} from "../../types";
 const city = [52.38333, 4.9];
 const zoom = 12;
 const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
 });
-
+const style = {
+  height: `100%`,
+  width: `100%`,
+};
 class Coord extends PureComponent {
 
-
-  constructor(props) {
-
-    super(props);
-    this.state = {};
-
-  }
 
   componentDidMount() {
 
@@ -34,20 +31,17 @@ class Coord extends PureComponent {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(map);
-    const {offerMock} = this.props;
-    offerMock.forEach((offerCords) => {
+    const {coords} = this.props;
+    coords.forEach((coord) => {
       leaflet
-        .marker(offerCords.coord, {icon})
+        .marker(coord, {icon})
         .addTo(map);
     });
 
   }
 
   render() {
-    const style = {
-      height: `100%`,
-      width: `100%`,
-    };
+
     return (
       <div id="map" style={style}></div>
     );
@@ -55,7 +49,7 @@ class Coord extends PureComponent {
   }
 }
 Coord.propTypes = {
-  offerMock: PropTypes.array.isRequired,
+  coords: PropTypes.arrayOf(coordType),
 };
 
 export default Coord;

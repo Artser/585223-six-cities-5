@@ -15,7 +15,7 @@ class Offer extends PureComponent {
 
   render() {
     const id = this.props.match.params.id;
-    const offer = OfferMock.filter((item) => item.id === +id);
+    const offer = OfferMock.find((item) => item.id === +id);
     return (
       <div className="page">
         <header className="header">
@@ -167,9 +167,9 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            <div style={{height: `300px`}}>
+            <div style={{height: `579px`}}>
               <Coord
-                offerMock={offer}
+                coords={[offer.coord]}
               />
             </div>
           </section>

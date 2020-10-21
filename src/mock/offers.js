@@ -1,3 +1,5 @@
+import reviews from "./reviews";
+
 const offers = [
   {
     id: 1,
@@ -8,7 +10,8 @@ const offers = [
     isPremium: true,
     rating: 80,
     coord: [52.3909553943508, 4.85309666406198],
-    city: `Amsterdam`
+    city: `Amsterdam`,
+    reviews,
   },
   {
     id: 2,
@@ -19,7 +22,9 @@ const offers = [
     isPremium: false,
     rating: 80,
     coord: [52.369553943508, 4.85309666406198],
-    city: `Hamburg`
+    city: `Hamburg`,
+    reviews,
+
   },
   {
     id: 3,
@@ -30,7 +35,9 @@ const offers = [
     isPremium: false,
     rating: 80,
     coord: [52.3909553943508, 4.929309666406198],
-    city: `Paris`
+    city: `Paris`,
+    reviews,
+
   },
   {
     id: 4,
@@ -41,7 +48,9 @@ const offers = [
     isPremium: true,
     rating: 100,
     coord: [52.3809553943508, 4.939309666406198],
-    city: `Cologne`
+    city: `Cologne`,
+    reviews,
+
   }
 ];
 

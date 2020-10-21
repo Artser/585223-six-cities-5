@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import OfferMock from "./mock/offers";
-import ReviewMock from "./mock/reviews";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import {reducer} from "./reducer-offer";
@@ -13,16 +12,11 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-const Options = {
-  RENT_COUNT: 100
-};
 
 ReactDOM.render(
     <Provider store={store}>
       <App
-        rentOptionsCount={Options.RENT_COUNT}
-        offerMock={OfferMock}
-        reviewMock={ReviewMock}
+        offers={OfferMock}
       />
     </Provider>,
     document.querySelector(`#root`)

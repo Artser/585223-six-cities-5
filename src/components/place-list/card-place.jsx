@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {offerType} from "../../types";
 
-const cardPlace = (props) => {
+const CardPlace = (props) => {
   const {offer, handleHover} = props;
   return (
     <article className="cities__place-card place-card"
@@ -13,13 +14,12 @@ const cardPlace = (props) => {
         handleHover(-1);
       }}
     >
-      {offer.isPremium ?
+      {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
-        </div> : ``}
-      {/*  <div className="place-card__mark">
-        <span>{offer.isPremium ? `Premium` : ``}</span>
-      </div> */}
+        </div>
+      )}
+
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`offer/${offer.id}`}>
           <img className="place-card__image" src={offer.imgLink} width="260" height="200" alt="Place image" />
@@ -53,9 +53,9 @@ const cardPlace = (props) => {
   );
 };
 
-cardPlace.propTypes = {
-  offer: PropTypes.object.isRequired,
+CardPlace.propTypes = {
+  offer: offerType,
   handleHover: PropTypes.func.isRequired
 };
 
-export default cardPlace;
+export default CardPlace;

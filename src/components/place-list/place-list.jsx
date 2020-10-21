@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import CardPlace from "./card-place";
+import {offerType} from "../../types";
 
 
 class PlaceList extends PureComponent {
@@ -9,24 +10,24 @@ class PlaceList extends PureComponent {
     super(props);
     this.handleHover = this.handleHover.bind(this);
     this.state = {
-      activePlace: -1,
+      activePlaceIndex: -1,
     };
   }
 
   handleHover(placeIndex) {
     this.setState({
-      activePlace: placeIndex
+      activePlaceIndex: placeIndex
     });
   }
 
   render() {
-    const {offerMock} = this.props;
+    const {offers} = this.props;
     return (
 
       <div className="cities__places-list places__list tabs__content">
 
         {
-          offerMock.map((offer) => (
+          offers.map((offer) => (
 
             <CardPlace key={offer.id} offer={offer} handleHover={this.handleHover} />
           ))
@@ -39,6 +40,6 @@ class PlaceList extends PureComponent {
 }
 
 PlaceList.propTypes = {
-  offerMock: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerType),
 };
 export default PlaceList;
