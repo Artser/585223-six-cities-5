@@ -22,6 +22,7 @@ export const offerType = PropTypes.shape({
   isPremium: PropTypes.bool.isRequired,
   rating: PropTypes.number.isRequired,
   coord: coordType,
+  cityId: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(reviewType),
 });

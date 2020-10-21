@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {coordType} from "../../types";
+// import {connect} from "react-redux";
+
 const city = [52.38333, 4.9];
 const zoom = 12;
 const icon = leaflet.icon({
@@ -53,3 +55,10 @@ Coord.propTypes = {
 };
 
 export default Coord;
+/* const mapStateToProps = (state) => {
+  const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
+  return {
+    offers: currentCityOffers,
+  };
+};
+export default connect(mapStateToProps)(Coord); */

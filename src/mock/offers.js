@@ -11,6 +11,7 @@ const offers = [
     rating: 80,
     coord: [52.3909553943508, 4.85309666406198],
     city: `Amsterdam`,
+    cityId: 10,
     reviews,
   },
   {
@@ -23,6 +24,7 @@ const offers = [
     rating: 80,
     coord: [52.369553943508, 4.85309666406198],
     city: `Hamburg`,
+    cityId: 20,
     reviews,
 
   },
@@ -36,6 +38,7 @@ const offers = [
     rating: 80,
     coord: [52.3909553943508, 4.929309666406198],
     city: `Paris`,
+    cityId: 30,
     reviews,
 
   },
@@ -49,6 +52,7 @@ const offers = [
     rating: 100,
     coord: [52.3809553943508, 4.939309666406198],
     city: `Cologne`,
+    cityId: 40,
     reviews,
 
   }

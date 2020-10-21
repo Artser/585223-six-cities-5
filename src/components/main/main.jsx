@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import PlaceList from "../place-list/place-list";
 import Coord from "../coord/coord";
 import {offerType} from "../../types";
+// import {connect} from "react-redux";
 
 const Main = (props) => {
   const {offers} = props;
@@ -112,3 +113,12 @@ Main.propTypes = {
 
 };
 export default Main;
+/* const mapStateToProps = (state) => {
+  const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
+  const currentCity = state.cities.find((city) => city.id === state.activeCityId);
+
+  return {
+    offers: currentCityOffers,
+    currentCity,
+  }; */
+// export default connect(mapStateToProps)(Main);
