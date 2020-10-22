@@ -5,18 +5,18 @@ import Main from "../main/main";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
+import {offerType} from "../../types";
 
 
 const App = (props) => {
-  const {rentOptionsCount} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <Main
-            rentOptionsCount={rentOptionsCount}
-            cardPlace={props}
+            offers={offers}
           />
         </Route>
         <Route exact path="/login">
@@ -25,13 +25,7 @@ const App = (props) => {
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route path="/offer/:id" exact >
-          <Offer
-            cardPlace={props}
-
-          />
-
-        </Route>
+        <Route path="/offer/:id" exact component={Offer} />
 
       </Switch>
     </BrowserRouter>
@@ -39,9 +33,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  rentOptionsCount: PropTypes.number.isRequired,
-  offerMock: PropTypes.array.isRequired,
-  reviewMock: PropTypes.array.isRequired
+  offers: PropTypes.arrayOf(offerType),
 };
 
 export default App;

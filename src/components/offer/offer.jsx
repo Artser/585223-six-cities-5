@@ -2,18 +2,20 @@ import React, {PureComponent} from "react";
 import ReviewForm from "../review-form/review-form";
 import ReviewList from "../review-list/review-list";
 import reviews from "../../mock/reviews";
-/* import geoObjects from "../../mock/neighbourhood";
-import NeighbourhoodMap from "../map/map";
-import SimpleExample from "../map/example"; */
+import Coord from "../coord/coord";
+import OfferMock from "../../mock/offers";
+import PropTypes from "prop-types";
+
 class Offer extends PureComponent {
   constructor(props) {
 
     super(props);
-    /*     this.offerMock = {props.cardPlace.offerMock},
-      this.reviewMock = {props.cardPlace.reviewMock} */
+
   }
 
   render() {
+    const id = this.props.match.params.id;
+    const offer = OfferMock.find((item) => item.id === +id);
     return (
       <div className="page">
         <header className="header">
@@ -165,11 +167,12 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            {/*   <NeighbourhoodMap
-              geoObjects={geoObjects}
-            /> */}
-            {/*             <SimpleExample/>
- */}          </section>
+            <div style={{height: `579px`}}>
+              <Coord
+                coords={[offer.coord]}
+              />
+            </div>
+          </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -278,5 +281,8 @@ class Offer extends PureComponent {
     );
   }
 }
+Offer.propTypes = {
+  match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
 
+};
 export default Offer;

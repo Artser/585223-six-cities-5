@@ -1,19 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import OfferMock from "./mock/offers";
-import ReviewMock from "./mock/reviews";
-
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import {reducer} from "./reducer-offer";
 import App from "./components/app/app";
 
-const Options = {
-  RENT_COUNT: 100
-};
+const store = createStore(
+    reducer, /* preloadedState, */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 
 ReactDOM.render(
-    <App
-      rentOptionsCount={Options.RENT_COUNT}
-      offerMock={OfferMock}
-      reviewMock={ReviewMock}
-    />,
+    <Provider store={store}>
+      <App
+        offers={OfferMock}
+      />
+    </Provider>,
     document.querySelector(`#root`)
 );
+
