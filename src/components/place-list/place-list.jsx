@@ -43,11 +43,3 @@ PlaceList.propTypes = {
 };
 export default PlaceList;
 
-
-/* const mapStateToProps = (state) => {
-  const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
-  return {
-    offers: currentCityOffers,
-  };
-};
-export default connect(mapStateToProps)(PlacesList); */
