@@ -34,3 +34,4 @@ export const cityType = PropTypes.shape({
 
 });
 
+export const citiesTypeArray = PropTypes.arrayOf(cityType);

@@ -5,6 +5,7 @@ import {offerType} from "../../types";
 
 const CardPlace = (props) => {
   const {offer, handleHover} = props;
+
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={() => {

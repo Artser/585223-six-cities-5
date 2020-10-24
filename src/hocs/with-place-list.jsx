@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+
 const withPlaceList = (WrappedComponentList) => {
   return class WithPlaceList extends PureComponent {
     constructor(props) {
@@ -19,7 +20,7 @@ const withPlaceList = (WrappedComponentList) => {
       return <WrappedComponentList
         {...this.props}
         activePlaceIndex={this.state.activePlaceIndex}
-        handleHover={this.handlHover}
+        handleHover={this.handleHover}
 
 
       />;

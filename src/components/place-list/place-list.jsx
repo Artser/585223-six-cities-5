@@ -2,12 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardPlace from "./card-place";
 import {offerType} from "../../types";
-// import {getSortedOffers} from "../../utils/functions";
 
 const PLaceList = ({offers, handleHover}) => {
 
   return (
-
     <div className="cities__places-list places__list tabs__content">
 
       {
@@ -25,16 +23,9 @@ const PLaceList = ({offers, handleHover}) => {
 
 PLaceList.propTypes = {
   offers: PropTypes.arrayOf(offerType),
-  activePlaceIndex: PropTypes.object.isRequired,
+  activePlaceIndex: PropTypes.number.isRequired,
   handleHover: PropTypes.func.isRequired,
 
 };
 export default PLaceList;
 
-/* const mapStateToProps = (state) => {
-  const currentCityOffers = getSortedOffers(state.offers.filter((offer) => offer.cityId === state.activeCityId), state.activeSortingType);
-  return {
-    offers: currentCityOffers,
-  };
-};
-export default connect(mapStateToProps)(PlacesList); */
