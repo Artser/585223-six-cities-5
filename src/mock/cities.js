@@ -4,6 +4,7 @@ export default [
     coord: [48.85, 2.34],
     id: 10,
   },
+
   {
     name: `Cologne`,
     coord: [50.93, 6.34],

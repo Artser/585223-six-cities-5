@@ -5,6 +5,10 @@ import reviews from "../../mock/reviews";
 import Coord from "../coord/coord";
 import OfferMock from "../../mock/offers";
 import PropTypes from "prop-types";
+import withReviewForm from "../../hocs/with-review-form";
+
+const ReviewFormWrapped = withReviewForm(ReviewForm);
+
 
 class Offer extends PureComponent {
   constructor(props) {
@@ -162,7 +166,7 @@ class Offer extends PureComponent {
                     reviewItems={reviews}
                   />
 
-                  <ReviewForm />
+                  <ReviewFormWrapped />
 
                 </section>
               </div>

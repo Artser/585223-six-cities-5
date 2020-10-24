@@ -1,45 +1,40 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import CardPlace from "./card-place";
 import {offerType} from "../../types";
+// import {getSortedOffers} from "../../utils/functions";
 
-class PlaceList extends PureComponent {
-  constructor(props) {
+const PLaceList = ({offers, handleHover}) => {
 
-    super(props);
-    this.handleHover = this.handleHover.bind(this);
-    this.state = {
-      activePlaceIndex: -1,
-    };
-  }
+  return (
 
-  handleHover(placeIndex) {
-    this.setState({
-      activePlaceIndex: placeIndex
-    });
-  }
+    <div className="cities__places-list places__list tabs__content">
 
-  render() {
-    const {offers} = this.props;
-    return (
+      {
+        offers.map((offer) => (
 
-      <div className="cities__places-list places__list tabs__content">
+          <CardPlace key={offer.id} offer={offer} handleHover={handleHover} />
+        ))
+      }
 
-        {
-          offers.map((offer) => (
+    </div>
+  );
 
-            <CardPlace key={offer.id} offer={offer} handleHover={this.handleHover} />
-          ))
-        }
-
-      </div>
-    );
-
-  }
-}
-
-PlaceList.propTypes = {
-  offers: PropTypes.arrayOf(offerType),
 };
-export default PlaceList;
 
+
+PLaceList.propTypes = {
+  offers: PropTypes.arrayOf(offerType),
+  activePlaceIndex: PropTypes.object.isRequired,
+  handleHover: PropTypes.func.isRequired,
+
+};
+export default PLaceList;
+
+/* const mapStateToProps = (state) => {
+  const currentCityOffers = getSortedOffers(state.offers.filter((offer) => offer.cityId === state.activeCityId), state.activeSortingType);
+  return {
+    offers: currentCityOffers,
+  };
+};
+export default connect(mapStateToProps)(PlacesList); */

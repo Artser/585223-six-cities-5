@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PlaceList from "../place-list/place-list";
 import Coord from "../coord/coord";
 import {cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import CitiesList from "../city-list/city-list";
+import withPlaceList from "../../hocs/with-place-list";
+import PLaceList from "../place-list/place-list";
+
+// import Sorting from "../sorting/sorting";
+
+const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
   const {offers, activeCity} = props;
@@ -58,7 +63,7 @@ const Main = (props) => {
             </form>
 
 
-            <PlaceList
+            <PlaceListWrapped
               offers={offers}
             />
           </section>
