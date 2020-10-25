@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-
+import {SORT_TYPES} from '../utils/functions';
 const withPlaceList = (WrappedComponentList) => {
   return class WithPlaceList extends PureComponent {
     constructor(props) {
@@ -13,7 +13,8 @@ const withPlaceList = (WrappedComponentList) => {
 
     handleHover(placeIndex) {
       this.setState({
-        activePlaceIndex: placeIndex
+        activePlaceIndex: placeIndex,
+        currentSortType: SORT_TYPES.POPULAR
       });
     }
     render() {

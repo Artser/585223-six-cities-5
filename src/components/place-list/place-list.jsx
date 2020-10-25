@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardPlace from "./card-place";
 import {offerType} from "../../types";
+import {connect} from "react-redux";
+import {getSortedOffers} from "../../utils/functions";
 
 const PLaceList = ({offers, handleHover}) => {
 
@@ -10,7 +12,6 @@ const PLaceList = ({offers, handleHover}) => {
 
       {
         offers.map((offer) => (
-
           <CardPlace key={offer.id} offer={offer} handleHover={handleHover} />
         ))
       }
@@ -27,5 +28,12 @@ PLaceList.propTypes = {
   handleHover: PropTypes.func.isRequired,
 
 };
-export default PLaceList;
+
+const mapStateToProps = (state) => {
+  const currentCityOffers = getSortedOffers(state.offers.filter((offer) => offer.cityId === state.activeCityId), state.activeSortingType);
+  return {
+    offers: currentCityOffers,
+  };
+};
+export default connect(mapStateToProps)(PLaceList);
 

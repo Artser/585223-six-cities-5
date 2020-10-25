@@ -2,6 +2,7 @@ import offers from "./mock/offers";
 import cities from "./mock/cities";
 import {ActionType} from "./action";
 import {ActionCreator} from "./action";
+import {SORT_TYPES} from './utils/functions';
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -12,6 +13,8 @@ export const initialState = {
   offers,
   hoveredOffer: null,
   isSortingListOpened: false,
+  activeSortingType: SORT_TYPES.POPULAR,
+
 };
 
 
