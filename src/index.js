@@ -1,23 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import OfferMock from "./mock/offers";
-import {createStore} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer-offer";
 import App from "./components/app/app";
+import {createStore, applyMiddleware, compose} from 'redux';
+import {createAPI} from './api/api';
+import thunk from "redux-thunk";
+import {ActionCreator, Operation as DataOperation, reducer} from "./reducer/data";
+
+const onLoadOffers = () => {
+  store.dispatch(ActionCreator.setActiveCity());
+};
+
+const api = createAPI(onLoadOffers);
+
 
 const store = createStore(
     reducer, /* preloadedState, */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
+store.dispatch(DataOperation.loadOffers())
+    .then(() => {
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        offers={OfferMock}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+      ReactDOM.render(
+          <Provider store={store}>
+            <App />
+          </Provider>,
+          document.querySelector(`#root`)
+      );
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error(`[APP ERROR]`, error.message);
+    });
 

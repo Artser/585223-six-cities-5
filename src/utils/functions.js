@@ -2,6 +2,20 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const getIdFromSityName = (cityName) => {
+  switch (cityName) {
+    case `Amsterdam`: return 1;
+    case `Hamburg`: return 2;
+    case `Paris`: return 3;
+    case `Cologne`: return 4;
+    case `Dusseldorf`: return 5;
+    case `Brussels`: return 6;
+    default:
+      return 0;
+  }
+
+};
+
 export const SORT_TYPES = {
   POPULAR: `Popular`,
   TO_HIGH_PRICE: `Price: low to high`,

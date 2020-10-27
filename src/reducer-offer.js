@@ -1,16 +1,9 @@
-import offers from "./mock/offers";
-import cities from "./mock/cities";
-import {ActionType} from "./action";
-import {ActionCreator} from "./action";
-import {SORT_TYPES} from './utils/functions';
+import {ActionCreator, ActionType} from "./action";
+import {extend, SORT_TYPES} from './utils/functions';
 
-export const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+
 export const initialState = {
-  activeCityId: 40,
-  cities,
-  offers,
+
   hoveredOffer: null,
   isSortingListOpened: false,
   activeSortingType: SORT_TYPES.POPULAR,
@@ -20,10 +13,10 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_ACTIVE_CITY:
+    /* case ActionType.SET_ACTIVE_CITY:
       return extend(state, {
         activeCityId: action.payload,
-      });
+      });*/
     case ActionType.SORT_OFFERS:
       return extend(state, {
         activeSortingType: action.payload,

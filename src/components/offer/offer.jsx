@@ -3,7 +3,7 @@ import ReviewForm from "../review-form/review-form";
 import ReviewList from "../review-list/review-list";
 import reviews from "../../mock/reviews";
 import Coord from "../coord/coord";
-import OfferMock from "../../mock/offers";
+// import OfferMock from "../../mock/offers";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
 
@@ -16,10 +16,9 @@ class Offer extends PureComponent {
     super(props);
 
   }
-
   render() {
-    const id = this.props.match.params.id;
-    const offer = OfferMock.find((item) => item.id === +id);
+    // const id = this.props.match.params.id;
+    // const offer = OfferMock.find((item) => item.id === +id);
     return (
       <div className="page">
         <header className="header">
@@ -173,7 +172,7 @@ class Offer extends PureComponent {
             </div>
             <div style={{height: `579px`}}>
               <Coord
-                coords={[offer.coord]}
+                // coords={[offer.coord]}
               />
             </div>
           </section>

@@ -10,6 +10,10 @@ export const ActionCreator = {
     type: ActionType.SET_ACTIVE_CITY,
     payload: id,
   }),
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
   sortOffers: (sortType) => ({
     type: ActionType.SORT_OFFERS,
     payload: sortType,
