@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../action";
+import {ActionCreator} from "../../reducer/data";
 import PropTypes from "prop-types";
 
 const SORTING_TYPES = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
