@@ -47,8 +47,6 @@ const mapStateToProps = (state) => {
   return {
     currentSortType: state.activeSortingType,
     isOpened: state.isSortingListOpened,
-  /*     currentSortType: getActiveSortingType(state),
-    isOpened: getSortingListState(state), */
   };
 };
 

@@ -8,7 +8,6 @@ import withPlaceList from "../../hocs/with-place-list";
 import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
-// import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
 
 const PlaceListWrapped = withPlaceList(PLaceList);
 
@@ -90,8 +89,6 @@ const mapStateToProps = (state) => {
   return {
     offers: currentCityOffers,
     activeCity,
-  /*    offers: getFilteredOffers(state),
-    currentCity: getActiveCity(state), */
   };
 };
 export default connect(mapStateToProps)(Main);

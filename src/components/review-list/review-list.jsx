@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import ReviewItem from "../review-item/review-item";
 import PropTypes from "prop-types";
+// import {Operation} from "../../reducer/data";
+// import {connect} from "react-redux";
 
 class ReviewList extends PureComponent {
   constructor(props) {
@@ -9,7 +11,11 @@ class ReviewList extends PureComponent {
 
   }
 
+  /*  componentDidMount() {
 
+    this.props.loadCurrentReview(id);
+  }
+ */
   render() {
     return (
       <React.Fragment>
@@ -35,3 +41,17 @@ ReviewList.propTypes = {
   reviewItems: PropTypes.array.isRequired,
 };
 export default ReviewList;
+/* const mapStateToProps = (state) => {
+  return {
+    offer: state.activeOffer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  loadCurrentReview: (id) => {
+
+    dispatch(Operation.oadCommentsByOfferId(id)
+    );
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewList); */

@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {coordType} from "../../types";
-// import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
 
 
 const zoom = 12;
@@ -18,7 +17,6 @@ class Coord extends PureComponent {
 
 
   componentDidMount() {
-    // console.log(this.props.activeCity);
     const city = [50.85, 4.34];
 
     const map = leaflet.map(`map`, {
@@ -57,12 +55,3 @@ Coord.propTypes = {
 
 export default Coord;
 
-/* const mapStateToProps = (state) => {
-  return {
-    offers: getFilteredOffers(state),
-    hoveredOffer: getHoveredOffer(state),
-    activeCity: getActiveCity(state),
-  };
-};
-
-export default connect(mapStateToProps)(Coord); */
