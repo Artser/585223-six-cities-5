@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {NameSpace} from "./name-space";
+import {NameSpace} from "../name-space.js";
 
 export const getOffers = (state) => {
   return state[NameSpace.DATA].offers;

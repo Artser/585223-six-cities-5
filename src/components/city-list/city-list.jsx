@@ -55,6 +55,8 @@ const mapStateToProps = (state) => {
   return {
     cities: state.cities,
     activeCityId: state.activeCityId,
+  /*   cities: getCities(state),
+    activeCityId: getActiveCityId(state), */
   };
 };
 
