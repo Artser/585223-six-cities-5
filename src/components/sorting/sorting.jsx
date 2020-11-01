@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/data";
 import PropTypes from "prop-types";
+// import {getActiveSortingType, getSortingListState} from "../../reducer/app-selectors";
 
 const SORTING_TYPES = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 
@@ -41,12 +42,15 @@ Sorting.propTypes = {
   toggleSortingList: PropTypes.func.isRequired,
   isOpened: PropTypes.bool.isRequired,
   currentSortType: PropTypes.string.isRequired
+
 };
 
 const mapStateToProps = (state) => {
   return {
     currentSortType: state.activeSortingType,
     isOpened: state.isSortingListOpened,
+    /*   currentSortType: getActiveSortingType(state),
+  isOpened: getSortingListState(state), */
   };
 };
 

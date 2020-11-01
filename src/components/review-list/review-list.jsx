@@ -43,7 +43,7 @@ ReviewList.propTypes = {
 export default ReviewList;
 /* const mapStateToProps = (state) => {
   return {
-    offer: state.activeOffer,
+    offer: state.comments,
   };
 };
 

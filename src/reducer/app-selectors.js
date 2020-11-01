@@ -1,4 +1,4 @@
-import {NameSpace} from "../name-space.js";
+import {NameSpace} from "./name-space.js";
 
 export const getHoveredOffer = (state) => {
   return state[NameSpace.APP].hoveredOffer;

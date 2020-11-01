@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-
+import {reviewType} from "../../types";
 
 class ReviewItem extends PureComponent {
   constructor(props) {
@@ -8,6 +8,8 @@ class ReviewItem extends PureComponent {
   }
   render() {
     const {autor} = this.props.reviewItem;
+    // const {review} = this.props;
+    // review.text
     return (
       <li className="reviews__item">
         <div className="reviews__user user">
@@ -36,6 +38,7 @@ class ReviewItem extends PureComponent {
 }
 ReviewItem.propTypes = {
   reviewItem: PropTypes.object.isRequired,
+  review: reviewType
 };
 
 export default ReviewItem;

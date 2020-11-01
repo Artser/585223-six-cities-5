@@ -112,6 +112,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeOffer: action.payload,
       });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
+      });
   }
   return state;
 };

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import ReviewForm from "../review-form/review-form";
-import ReviewList from "../review-list/review-list";
-import reviews from "../../mock/reviews";
+// import ReviewList from "../review-list/review-list";
+// import reviews from "../../mock/reviews";
 import Coord from "../coord/coord";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
@@ -160,9 +160,9 @@ class Offer extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ReviewList
+                  {/*  <ReviewList
                     reviewItems={reviews}
-                  />
+                  /> */}
 
                   <ReviewFormWrapped />
 
