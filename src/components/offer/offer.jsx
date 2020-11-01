@@ -1,13 +1,13 @@
 import React, {PureComponent} from "react";
 import ReviewForm from "../review-form/review-form";
-// import ReviewList from "../review-list/review-list";
-// import reviews from "../../mock/reviews";
+import ReviewList from "../review-list/review-list";
 import Coord from "../coord/coord";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
 import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
 import {offerType} from "../../types";
+// import {getCurrentOffer} from '../../reducer/reselect';
 
 const ReviewFormWrapped = withReviewForm(ReviewForm);
 
@@ -160,9 +160,8 @@ class Offer extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  {/*  <ReviewList
-                    reviewItems={reviews}
-                  /> */}
+                  <ReviewList
+                  />
 
                   <ReviewFormWrapped />
 

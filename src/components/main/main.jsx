@@ -8,7 +8,7 @@ import withPlaceList from "../../hocs/with-place-list";
 import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
-// import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
+import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
 
 const PlaceListWrapped = withPlaceList(PLaceList);
 
@@ -83,15 +83,15 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
-  const activeCity = state.cities.find((item) => item.id === state.activeCityId);
+/*   const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
+  const activeCity = state.cities.find((item) => item.id === state.activeCityId); */
 
 
   return {
-    offers: currentCityOffers,
-    activeCity,
-  /*   offers: getFilteredOffers(state),
-    currentCity: getActiveCity(state), */
+  /*   offers: currentCityOffers,
+    activeCity, */
+    offers: getFilteredOffers(state),
+    activeCity: getActiveCity(state),
   };
 };
 export default connect(mapStateToProps)(Main);

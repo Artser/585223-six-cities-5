@@ -7,8 +7,7 @@ class ReviewItem extends PureComponent {
     super(props);
   }
   render() {
-    const {autor} = this.props.reviewItem;
-    // const {review} = this.props;
+    const {autor, text} = this.props.reviewItem;
     // review.text
     return (
       <li className="reviews__item">
@@ -26,7 +25,7 @@ class ReviewItem extends PureComponent {
             </div>
           </div>
           <p className="reviews__text">
-            A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+            {text}
           </p>
           <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
         </div>

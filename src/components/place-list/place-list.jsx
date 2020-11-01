@@ -4,9 +4,8 @@ import CardPlace from "./card-place";
 import {offerType} from "../../types";
 import {connect} from "react-redux";
 import {getSortedOffers} from "../../utils/functions";
-// import {getActiveSortingType} from '../../reducer/app-selectors';
-// import {getFilteredOffers} from "../../reducer/reselect";
-// import {getFilteredOffers} from '../../reducer/reselect';
+import {getActiveSortingType} from '../../reducer/app-selectors';
+import {getFilteredOffers} from "../../reducer/reselect";
 
 const PLaceList = ({offers, handleHover}) => {
 
@@ -33,12 +32,10 @@ PLaceList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const currentCityOffers = getSortedOffers(state.offers.filter((offer) => offer.cityId === state.activeCityId), state.activeSortingType);
-  // const currentCityOffers = getSortedOffers(getFilteredOffers(state), getActiveSortingType(state));
+  const currentCityOffers = getSortedOffers(getFilteredOffers(state), getActiveSortingType(state));
 
   return {
     offers: currentCityOffers,
-    // offers: getFilteredOffers(state),
 
   };
 };

@@ -1,4 +1,4 @@
-import {extend} from "../utils/functions";
+import {extend, SORT_TYPES} from "../utils/functions";
 import {createOffers, createComments} from "../adapters/offers";
 import {createCity} from "../adapters/cities";
 
@@ -7,6 +7,10 @@ export const initialState = {
   activeOffer: null,
   offers: [],
   cities: [],
+  hoveredOffer: null,
+  activeSortingType: SORT_TYPES.POPULAR,
+  isSortingListOpened: false,
+
 };
 
 const ActionType = {
@@ -15,6 +19,9 @@ const ActionType = {
   SET_CITIES: `SET_CITIES`,
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  SORT_OFFERS: `SORT_OFFERS`,
+  TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
+  GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
 };
 
 const ActionCreator = {
@@ -37,8 +44,19 @@ const ActionCreator = {
   loadCommentsByOfferId: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
-  })
-
+  }),
+  sortOffers: (sortType) => ({
+    type: ActionType.SORT_OFFERS,
+    payload: sortType,
+  }),
+  toggleSorting: (isOpened) => ({
+    type: ActionType.TOGGLE_SORTING_LIST,
+    payload: !isOpened
+  }),
+  getHoveredOffer: (offer) => ({
+    type: ActionType.GET_HOVERED_OFFER,
+    payload: offer,
+  }),
 };
 
 const Operation = {
@@ -78,17 +96,17 @@ const Operation = {
   },
   loadCommentsByOfferId: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-    .then((response)=>{
+      .then((response) => {
 
-      const adapterComments = response.data.map((comment) => createComments(comment));
+        const adapterComments = response.data.map((comment) => createComments(comment));
 
 
-      dispatch(ActionCreator.loadCommentsByOfferId(adapterComments));
+        dispatch(ActionCreator.loadCommentsByOfferId(adapterComments));
 
-    }).catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(`[HOTELS ERROR]`, error.message);
-    });
+      }).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(`[HOTELS ERROR]`, error.message);
+      });
 
 
   }
@@ -115,6 +133,18 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return extend(state, {
         comments: action.payload,
+      });
+    case ActionType.SORT_OFFERS:
+      return extend(state, {
+        activeSortingType: action.payload,
+      });
+    case ActionType.TOGGLE_SORTING_LIST:
+      return extend(state, {
+        isSortingListOpened: action.payload
+      });
+    case ActionType.GET_HOVERED_OFFER:
+      return extend(state, {
+        hoveredOffer: action.payload
       });
   }
   return state;

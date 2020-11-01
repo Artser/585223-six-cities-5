@@ -1,13 +1,13 @@
-import {NameSpace} from "./name-space.js";
+// import {NameSpace} from "./name-space.js";
 
 export const getHoveredOffer = (state) => {
-  return state[NameSpace.APP].hoveredOffer;
+  return state.hoveredOffer;
 };
 
 export const getActiveSortingType = (state) => {
-  return state[NameSpace.APP].activeSortingType;
+  return state.activeSortingType;
 };
 
 export const getSortingListState = (state) => {
-  return state[NameSpace.APP].isSortingListOpened;
+  return state.isSortingListOpened;
 };
