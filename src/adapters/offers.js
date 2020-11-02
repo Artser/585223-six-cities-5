@@ -31,13 +31,15 @@ export const createOffers = (offer) => {
 
 
 export const createComments = (comment) => {
-  return ({
-    id: comment.id,
-    avatar: comment.avatar_url,
-    autor: comment.name,
-    rating: comment.rating,
-    date: new Date(comment.date),
-    text: comment.comment
-  });
+  return (
+    {
+      id: comment.id,
+      avatar: comment.user.avatar_url,
+      autor: comment.user.name,
+      rating: comment.rating,
+      date: new Date(comment.date),
+      text: comment.comment
+    }
+  );
 
 };

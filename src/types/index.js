@@ -8,7 +8,8 @@ export const reviewType = PropTypes.shape({
   avatar: PropTypes.string.isRequired,
   autor: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  date: PropTypes.instanceOf(Date),
+  date: PropTypes.object.isRequired,
+
   text: PropTypes.string.isRequired,
 });
 

@@ -83,13 +83,10 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-/*   const currentCityOffers = state.offers.filter((offer) => offer.cityId === state.activeCityId);
-  const activeCity = state.cities.find((item) => item.id === state.activeCityId); */
 
 
   return {
-  /*   offers: currentCityOffers,
-    activeCity, */
+
     offers: getFilteredOffers(state),
     activeCity: getActiveCity(state),
   };
