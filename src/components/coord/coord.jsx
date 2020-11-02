@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {coordType} from "../../types";
+import {coordType, cityType} from "../../types";
+import {connect} from "react-redux";
+import {getActiveCity} from "../../reducer/reselect";
 
 
 const zoom = 12;
@@ -13,32 +15,51 @@ const style = {
   height: `100%`,
   width: `100%`,
 };
+
+
 class Coord extends PureComponent {
+  constructor(props) {
 
+    super(props);
+    this._map = null;
 
-  componentDidMount() {
-    const city = [50.85, 4.34];
+  }
 
-    const map = leaflet.map(`map`, {
-      center: city,
+  _resetMap() {
+    this._map.remove();
+  }
+
+  _setMap() {
+    const {activeCity} = this.props;
+    this._map = leaflet.map(`map`, {
+      center: activeCity.coord,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    this._map.setView(activeCity.coord, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
     const {coords} = this.props;
     coords.forEach((coord) => {
       leaflet
         .marker(coord, {icon})
-        .addTo(map);
+        .addTo(this._map);
     });
+  }
 
+
+  componentDidUpdate() {
+    this._resetMap();
+    this._setMap();
+  }
+
+  componentDidMount() {
+    this._setMap();
   }
 
   render() {
@@ -51,7 +72,15 @@ class Coord extends PureComponent {
 }
 Coord.propTypes = {
   coords: PropTypes.arrayOf(coordType),
+  activeCity: cityType,
 };
 
-export default Coord;
+const mapStateToProps = (state) => {
+  return {
+    activeCity: getActiveCity(state),
+
+  };
+};
+export default connect(mapStateToProps)(Coord);
+
 

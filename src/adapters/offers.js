@@ -24,7 +24,9 @@ export const createOffers = (offer) => {
       bedrooms: offer.bedrooms,
       description: offer.description,
       images: sixImage(offer.images),
-      goods: offer.goods
+      goods: offer.goods,
+      avatar: offer.host.avatar_url,
+      name: offer.host.name
     }
   );
 };

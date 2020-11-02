@@ -28,7 +28,9 @@ export const offerType = PropTypes.shape({
   adults: PropTypes.number.isRequired,
   cityId: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
-  good: PropTypes.string.isRequired,
+  goods: PropTypes.array.isRequired,
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(reviewType),
 });
 
