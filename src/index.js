@@ -7,13 +7,11 @@ import App from "./components/app/app";
 import {createStore, applyMiddleware} from 'redux';
 import {createAPI} from './api/api';
 import thunk from "redux-thunk";
-import {ActionCreator, Operation as DataOperation, reducer} from "./reducer/data";
+import {Operation as DataOperation, reducer} from "./reducer/data";
+// import {Operation as login, userReducer} from "./reducer/user/user";
 
-const onLoadOffers = () => {
-  store.dispatch(ActionCreator.setActiveCity());
-};
 
-const api = createAPI(onLoadOffers);
+const api = createAPI();
 // const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)));
 
 
@@ -26,7 +24,7 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers())
     .then(() => {
-
+    //  store.dispatch(ActionCreator.setActiveCity(1));
       ReactDOM.render(
           <Provider store={store}>
             <App />

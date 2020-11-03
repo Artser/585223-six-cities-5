@@ -4,12 +4,12 @@ export const extend = (a, b) => {
 
 export const getIdFromSityName = (cityName) => {
   switch (cityName) {
-    case `Amsterdam`: return 1;
-    case `Hamburg`: return 2;
-    case `Paris`: return 3;
-    case `Cologne`: return 4;
-    case `Dusseldorf`: return 5;
-    case `Brussels`: return 6;
+    case `Amsterdam`: return 4;
+    case `Hamburg`: return 5;
+    case `Paris`: return 1;
+    case `Cologne`: return 2;
+    case `Dusseldorf`: return 6;
+    case `Brussels`: return 3;
     default:
       return 0;
   }

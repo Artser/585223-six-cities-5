@@ -1,5 +1,8 @@
 
 import React from "react";
+import {connect} from "react-redux";
+// import {ActionCreator} from '../../reducer/user/user';
+
 
 const Login = () => {
   return (
@@ -56,4 +59,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    authorizationStatus: state.authorizationStatus,
+  };
+};
+
+/* const mapDispatchToProps = (dispatch) => ({
+
+}); */
+
+
+export default connect(mapStateToProps)(Login);

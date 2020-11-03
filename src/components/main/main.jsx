@@ -9,6 +9,7 @@ import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
 import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
+// import {ActionCreator} from '../../reducer/user/user';
 
 const PlaceListWrapped = withPlaceList(PLaceList);
 

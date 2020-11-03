@@ -21,7 +21,7 @@ class ReviewList extends PureComponent {
   render() {
     return (
       <React.Fragment>
-        <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+        <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.props.comments.length}</span></h2>
         <ul className="reviews__list">
           {
             this.props.comments.map((item) => (
@@ -40,7 +40,7 @@ class ReviewList extends PureComponent {
 }
 
 ReviewList.propTypes = {
-  reviewItems: PropTypes.array.isRequired,
+  // reviewItems: PropTypes.array.isRequired,
   loadCurrentReview: PropTypes.func.isRequired,
   comments: PropTypes.array.isRequired,
   match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),

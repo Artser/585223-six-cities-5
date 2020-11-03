@@ -76,7 +76,7 @@ const Operation = {
           acc[city.id] = city;
           return acc;
         }, {});
-        dispatch(ActionCreator.setActiveCity(loadedOffers[0].cityId));
+        dispatch(ActionCreator.setActiveCity(1));
         dispatch(ActionCreator.loadOffers(loadedOffers));
         dispatch(ActionCreator.setCities(Object.values(cities)));
       })
