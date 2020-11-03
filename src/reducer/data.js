@@ -22,6 +22,7 @@ const ActionType = {
   SORT_OFFERS: `SORT_OFFERS`,
   TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
   GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 const ActionCreator = {
@@ -56,6 +57,11 @@ const ActionCreator = {
   getHoveredOffer: (offer) => ({
     type: ActionType.GET_HOVERED_OFFER,
     payload: offer,
+  }),
+
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status
   }),
 };
 

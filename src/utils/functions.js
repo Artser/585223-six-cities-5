@@ -15,7 +15,16 @@ export const getIdFromSityName = (cityName) => {
   }
 
 };
-
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`
+};
+export const PagePath = {
+  MAIN: `/`,
+  FAVORITE: `/favorites`,
+  LOGIN: `/login`,
+  OFFER: `/offer/`
+};
 export const SORT_TYPES = {
   POPULAR: `Popular`,
   TO_HIGH_PRICE: `Price: low to high`,

@@ -14,6 +14,7 @@ const onLoadOffers = () => {
 };
 
 const api = createAPI(onLoadOffers);
+// const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)));
 
 
 const store = createStore(
