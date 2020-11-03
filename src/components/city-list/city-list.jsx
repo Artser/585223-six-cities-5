@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {citiesTypeArray} from "../../types/index";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/data';
-// import {getActiveCityId, getCities} from "../../reducer/reselect";
 
 const CityItem = React.memo(function CityItem({name, setCurrentCityAsActive, isActive}) {
   return (
@@ -56,8 +55,6 @@ const mapStateToProps = (state) => {
   return {
     cities: state.cities,
     activeCityId: state.activeCityId,
-    /*  cities: getCities(state),
-    activeCityId: getActiveCityId(state), */
   };
 };
 
