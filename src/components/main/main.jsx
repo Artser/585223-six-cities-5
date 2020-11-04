@@ -5,6 +5,7 @@ import {cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import CitiesList from "../city-list/city-list";
 import withPlaceList from "../../hocs/with-place-list";
+
 import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
@@ -22,7 +23,9 @@ const Main = (props) => {
   const classNameForMainTag = isMainPageEmpty ? `page__main--index-empty` : ``;
   const classNameForPlaceContainer = isMainPageEmpty ? `cities__places-container--empty` : ``;
   const classNameForSection = isMainPageEmpty ? `cities__no-places` : `cities__places places`;
+
   return <div className="page page--gray page--main">
+
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -85,7 +88,7 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(offerType),
   activeCity: cityType,
   authorizationStatus: PropTypes.string,
-  authInfo: PropTypes.string,
+  authInfo: PropTypes.object,
 
 };
 
