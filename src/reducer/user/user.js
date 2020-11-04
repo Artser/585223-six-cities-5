@@ -50,11 +50,15 @@ const Operation = {
         console.error(`[AUTH ERROR]`, error.message);
       });
   },
-  login: (authData) => (dispatch, getState, api) => {
-    return api.post(`/login`, authData) // {}
-      .then((response) => {
-        dispatch(ActionCreator.setAuthInfo(response.data));
-      })
+  login: (email, password) => (dispatch, getState, api) => {
+    return api.post(`/login`, {
+      email,
+      password,
+
+    }) // {}
+          .then((response) => {
+            dispatch(ActionCreator.setAuthInfo(response.data));
+          })
       .catch((error) => {
         // eslint-disable-next-line no-console
         console.error(`[LOGIN ERROR]`, error.message);

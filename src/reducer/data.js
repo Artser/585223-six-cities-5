@@ -1,6 +1,7 @@
 import {extend, SORT_TYPES} from "../utils/functions";
 import {createOffers, createComments} from "../adapters/offers";
 import {createCity} from "../adapters/cities";
+import {AuthorizationStatus} from "./user/user";
 
 export const initialState = {
   activeCityId: undefined,
@@ -10,6 +11,8 @@ export const initialState = {
   hoveredOffer: null,
   activeSortingType: SORT_TYPES.POPULAR,
   isSortingListOpened: false,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authInfo: null,
 
 };
 
@@ -22,7 +25,9 @@ const ActionType = {
   SORT_OFFERS: `SORT_OFFERS`,
   TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
   GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  // REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_AUTH_STATUS: `SET_AUTH_STATUS`,
+  SET_AUTH_INFO: `SET_AUTH_INFO`,
 };
 
 const ActionCreator = {
@@ -59,10 +64,10 @@ const ActionCreator = {
     payload: offer,
   }),
 
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status
-  }),
+  /*   requireAuthorization: (status) => ({
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: status
+    }), */
 };
 
 const Operation = {
@@ -152,6 +157,20 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: action.payload
       });
+    case ActionType.SET_AUTH_INFO:
+
+      if (action.payload) {
+        return extend(state, {
+          authorizationStatus: AuthorizationStatus.AUTH,
+          authInfo: action.payload,
+        });
+      }
+      return extend(state, {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        authInfo: null,
+      });
+
+
   }
   return state;
 };

@@ -9,12 +9,14 @@ import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
 import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
+import {Link} from "react-router-dom";
+import {AuthorizationStatus} from "../../reducer/user/user";
 // import {ActionCreator} from '../../reducer/user/user';
 
 const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
-  const {offers, activeCity} = props;
+  const {offers, activeCity, authorizationStatus, authInfo} = props;
   // константы для проверки пустоты ниже
   const isMainPageEmpty = offers.length ? false : true;
   const classNameForMainTag = isMainPageEmpty ? `page__main--index-empty` : ``;
@@ -32,10 +34,11 @@ const Main = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <Link to="/login" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span></a>
+                  <span className="header__login">{ authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : `Sign In`}</span>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -54,7 +57,7 @@ const Main = (props) => {
               : <React.Fragment>
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
-                <Sorting/>
+                <Sorting />
 
 
                 <PlaceListWrapped
@@ -81,13 +84,17 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerType),
   activeCity: cityType,
+  authorizationStatus: PropTypes.string,
+  authInfo: PropTypes.string,
+
 };
 
 const mapStateToProps = (state) => {
 
 
   return {
-
+    authorizationStatus: state.authorizationStatus,
+    authInfo: state.authInfo,
     offers: getFilteredOffers(state),
     activeCity: getActiveCity(state),
   };
