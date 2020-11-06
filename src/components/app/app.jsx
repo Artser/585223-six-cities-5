@@ -4,7 +4,9 @@ import Main from "../main/main";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
+import withLogin from "../../hocs/with-login";
 
+const LoginWrapped = withLogin(Login);
 
 const App = () => {
 
@@ -16,7 +18,7 @@ const App = () => {
           />
         </Route>
         <Route exact path="/login">
-          <Login />
+          <LoginWrapped />
         </Route>
         <Route exact path="/favorites">
           <Favorites />

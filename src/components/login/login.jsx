@@ -3,9 +3,19 @@ import React from "react";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/user/user";
 import PropTypes from 'prop-types';
+import {AuthorizationStatus, PagePath} from "../../utils/functions";
+import {Redirect} from "react-router-dom";
 
-const Login = ({loginRef, passwordRef, handleSubmit}) => {
+const Login = ({email, password, login, handlePassword, handleEmail, authorizationStatus}) => {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    login(email, password);
 
+  };
+
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return < Redirect to={PagePath.MAIN} />;
+  }
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -38,11 +48,14 @@ const Login = ({loginRef, passwordRef, handleSubmit}) => {
             <form className="login__form form" action="#" method="post">
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input ref={loginRef} className="login__input form__input" type="email" name="email" placeholder="Email" required="" />
+                <input onChange={ handleEmail} className="login__input form__input" type="email" value={email} name="email" placeholder="Email" required="" />
+
+
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required="" />
+                <input onChange={handlePassword} className="login__input form__input" type="password" value={password} name="password" placeholder="Password" required="" />
+
               </div>
               <button onClick={handleSubmit} className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
@@ -76,8 +89,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Login.propTypes = {
-  loginRef: PropTypes.func.isRequired,
-  passwordRef: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  login: PropTypes.func,
+  handlePassword: PropTypes.func,
+  handleEmail: PropTypes.func,
+  authorizationStatus: PropTypes.string
+
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

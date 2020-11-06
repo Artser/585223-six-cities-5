@@ -1,6 +1,7 @@
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
+export const MAX_REVIEWS_LENGTH = 10;
 
 export const getIdFromSityName = (cityName) => {
   switch (cityName) {

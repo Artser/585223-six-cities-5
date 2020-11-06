@@ -8,6 +8,9 @@ export const initialState = {
   activeOffer: null,
   offers: [],
   cities: [],
+  nearPlaces: null,
+  reviews: [],
+
   hoveredOffer: null,
   activeSortingType: SORT_TYPES.POPULAR,
   isSortingListOpened: false,
@@ -25,9 +28,11 @@ const ActionType = {
   SORT_OFFERS: `SORT_OFFERS`,
   TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
   GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
-  // REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_AUTH_STATUS: `SET_AUTH_STATUS`,
   SET_AUTH_INFO: `SET_AUTH_INFO`,
+  LOAD_NEAR_PLACES: `LOAD_NEAR_PLACES`,
+  SET_REVIEWS: `SET_REVIEWS`,
+
 };
 
 const ActionCreator = {
@@ -63,11 +68,15 @@ const ActionCreator = {
     type: ActionType.GET_HOVERED_OFFER,
     payload: offer,
   }),
+  loadNearPlacesId: (offers) => ({
+    type: ActionType.LOAD_NEAR_PLACES,
+    payload: offers,
+  }),
+  setReviews: (reviews) => ({
+    type: ActionType.SET_REVIEWS,
+    payload: reviews,
+  }),
 
-  /*   requireAuthorization: (status) => ({
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status
-    }), */
 };
 
 const Operation = {
@@ -118,9 +127,25 @@ const Operation = {
         // eslint-disable-next-line no-console
         console.error(`[HOTELS ERROR]`, error.message);
       });
+  },
 
+  loadNearPlacesId: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
 
-  }
+        const loadedOffers = response.data.map((offer) => createOffers(offer));
+
+        dispatch(ActionCreator.loadNearPlacesId(loadedOffers));
+
+      }).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(`[HOTELS ERROR]`, error.message);
+      });
+  },
+  postReview: (offerId, comment, rating) => (dispatch, getState, api) => {
+    return api.post(`/comments/${offerId}`, {comment, rating});
+  },
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -130,6 +155,10 @@ const reducer = (state = initialState, action) => {
         activeCityId: action.payload,
       });
     case ActionType.LOAD_OFFERS:
+      return extend(state, {
+        offers: action.payload
+      });
+    case ActionType.LOAD_NEAR_PLACES:
       return extend(state, {
         offers: action.payload
       });
@@ -156,6 +185,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_HOVERED_OFFER:
       return extend(state, {
         hoveredOffer: action.payload
+      });
+
+    case ActionType.SET_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
       });
     case ActionType.SET_AUTH_INFO:
 

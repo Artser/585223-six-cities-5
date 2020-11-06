@@ -1,4 +1,6 @@
 import React, {PureComponent} from 'react';
+
+
 const withReviewForm = (WrappedComponentForm) => {
   return class WithReviewForm extends PureComponent {
 

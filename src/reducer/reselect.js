@@ -4,7 +4,9 @@ import {createSelector} from "reselect";
 export const getOffers = (state) => {
   return state.offers;
 };
-
+export const getReviews = (state) => {
+  return state.reviews;
+};
 export const getCurrentOffer = (state, offerId) => {
   return getOffers(state).find((offer) => offer.id === +offerId);
 };

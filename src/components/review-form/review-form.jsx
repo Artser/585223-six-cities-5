@@ -1,11 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {Operation} from "../../reducer/data";
 
-const ReviewForm = ({onRatingChange, onReviewChange, review}) => {
+
+const ReviewForm = ({onRatingChange, onReviewChange, review, setReviews, id, rating}) => {
+  const handlerSubmit = (evt) => {
+    evt.preventDefault();
+    setReviews(id, review, rating);
+  };
 
   return (
 
-    <form className="reviews__form form" action="#" method="post" >
+    <form onSubmit={handlerSubmit} className="reviews__form form" action="#" method="post" >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" onChange={onRatingChange} value="5" id="5-stars" type="radio" />
@@ -60,7 +67,24 @@ const ReviewForm = ({onRatingChange, onReviewChange, review}) => {
 ReviewForm.propTypes = {
   onRatingChange: PropTypes.func.isRequired,
   onReviewChange: PropTypes.func.isRequired,
-  review: PropTypes.string.isRequired
+  review: PropTypes.string.isRequired,
+  setReviews: PropTypes.func,
+  id: PropTypes.number,
+  rating: PropTypes.number
 };
 
-export default ReviewForm;
+const mapStateToProps = () => {
+  return {
+
+  };
+};
+
+
+const mapDispatchToProps = (dispatch) => ({
+  setReviews: (offerId, review, rating) => {
+
+    dispatch(Operation.postReview(offerId, review, rating)
+    );
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);
