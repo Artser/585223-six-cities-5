@@ -69,7 +69,7 @@ ReviewForm.propTypes = {
   onReviewChange: PropTypes.func.isRequired,
   review: PropTypes.string.isRequired,
   setReviews: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string,
   rating: PropTypes.number
 };
 

@@ -5,6 +5,10 @@ import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import withLogin from "../../hocs/with-login";
+import withHighlightedOffer from "../../hocs/with-highlighted-offer";
+
+
+const MainWrapped = withHighlightedOffer(Main);
 
 const LoginWrapped = withLogin(Login);
 
@@ -14,7 +18,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main
+          <MainWrapped
           />
         </Route>
         <Route exact path="/login">

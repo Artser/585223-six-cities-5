@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {coordType, cityType} from "../../types";
+import {coordType, cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import {getActiveCity} from "../../reducer/reselect";
 
@@ -11,6 +11,12 @@ const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
 });
+
+const activeIcon = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
 const style = {
   height: `100%`,
   width: `100%`,
@@ -25,12 +31,19 @@ class Coord extends PureComponent {
 
   }
 
+  _drawActivePin(coord) {
+    leaflet
+      .marker(coord, {icon: activeIcon, zIndexOffset: 1000})
+      .addTo(this._map);
+  }
+
   _resetMap() {
     this._map.remove();
   }
 
   _setMap() {
-    const {activeCity} = this.props;
+
+    const {activeCity, activeOffer} = this.props;
     this._map = leaflet.map(`map`, {
       center: activeCity.coord,
       zoom,
@@ -50,6 +63,10 @@ class Coord extends PureComponent {
         .marker(coord, {icon})
         .addTo(this._map);
     });
+
+    if (activeOffer) {
+      this._drawActivePin(activeOffer);
+    }
   }
 
 
@@ -73,12 +90,13 @@ class Coord extends PureComponent {
 Coord.propTypes = {
   coords: PropTypes.arrayOf(coordType),
   activeCity: cityType,
+  offer: offerType,
+  activeOffer: PropTypes.array
 };
 
 const mapStateToProps = (state) => {
   return {
     activeCity: getActiveCity(state),
-
   };
 };
 export default connect(mapStateToProps)(Coord);

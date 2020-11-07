@@ -155,7 +155,8 @@ class Offer extends PureComponent {
             </div>
             <div style={{height: `579px`}}>
               <Coord
-                coords={[offer.coord]}
+                coords={[]}
+                activeOffer={offer.coord}
               />
             </div>
           </section>

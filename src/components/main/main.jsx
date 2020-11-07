@@ -5,24 +5,24 @@ import {cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import CitiesList from "../city-list/city-list";
 import withPlaceList from "../../hocs/with-place-list";
-
 import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
 import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
 import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user";
-// import {ActionCreator} from '../../reducer/user/user';
 
 const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
-  const {offers, activeCity, authorizationStatus, authInfo} = props;
+  const {offers, activeCity, authorizationStatus, authInfo, handleOfferChange, activeOfferIndex} = props;
   // константы для проверки пустоты ниже
   const isMainPageEmpty = offers.length ? false : true;
   const classNameForMainTag = isMainPageEmpty ? `page__main--index-empty` : ``;
   const classNameForPlaceContainer = isMainPageEmpty ? `cities__places-container--empty` : ``;
   const classNameForSection = isMainPageEmpty ? `cities__no-places` : `cities__places places`;
+  const activeOffer = offers.find((offer) => offer.id === activeOfferIndex);
+
 
   return <div className="page page--gray page--main">
 
@@ -40,7 +40,7 @@ const Main = (props) => {
                 <Link to="/login" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__login">{ authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : `Sign In`}</span>
+                  <span className="header__login">{authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : `Sign In`}</span>
                 </Link>
               </li>
             </ul>
@@ -65,6 +65,7 @@ const Main = (props) => {
 
                 <PlaceListWrapped
                   offers={offers}
+                  onHover={handleOfferChange}
                 />
               </React.Fragment>
             }
@@ -76,6 +77,7 @@ const Main = (props) => {
               : <Coord
                 coords={offers.map(({coord}) => coord)}
                 activeCity={activeCity}
+                activeOffer={activeOffer && activeOffer.coord}
               />}
 
           </div>
@@ -89,6 +91,8 @@ Main.propTypes = {
   activeCity: cityType,
   authorizationStatus: PropTypes.string,
   authInfo: PropTypes.object,
+  handleOfferChange: PropTypes.func,
+  activeOfferIndex: PropTypes.number,
 
 };
 
