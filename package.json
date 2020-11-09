@@ -7,7 +7,8 @@
     "eslint": "eslint --ext .jsx --ext .js src/",
     "test": "npm run eslint",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test.jest": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.8",

@@ -200,6 +200,7 @@ const mapStateToProps = (state) => {
     offer: state.activeOffer,
     authorizationStatus: state.authorizationStatus,
     authInfo: state.authInfo,
+    // nearPlaces: state.nearPlaces
     nearPlaces: [{id: 1, type: `room`, title: `room2`, price: 60, imgLink: ``}],
     // nearPlaces: state.loadNearPlacesId,
   };

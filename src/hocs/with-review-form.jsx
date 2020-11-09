@@ -23,7 +23,6 @@ const withReviewForm = (WrappedComponentForm) => {
 
     handleReview(evt) {
       this.setState({review: evt.target.value});
-
     }
 
     render() {

@@ -82,8 +82,9 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => ({
   setReviews: (offerId, review, rating) => {
-
+    // setState({rate:0,text:'',})
     dispatch(Operation.postReview(offerId, review, rating)
+
     );
   }
 });

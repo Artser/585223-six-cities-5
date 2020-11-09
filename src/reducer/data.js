@@ -1,7 +1,7 @@
-import {extend, SORT_TYPES} from "../utils/functions";
-import {createOffers, createComments} from "../adapters/offers";
-import {createCity} from "../adapters/cities";
-import {AuthorizationStatus} from "./user/user";
+import { extend, PagePath, SORT_TYPES } from "../utils/functions";
+import { createOffers, createComments } from "../adapters/offers";
+import { createCity } from "../adapters/cities";
+import { AuthorizationStatus } from "./user/user";
 
 export const initialState = {
   activeCityId: undefined,
@@ -10,6 +10,8 @@ export const initialState = {
   cities: [],
   nearPlaces: null,
   reviews: [],
+  favourites: [],
+
 
   hoveredOffer: null,
   activeSortingType: SORT_TYPES.POPULAR,
@@ -32,6 +34,8 @@ const ActionType = {
   SET_AUTH_INFO: `SET_AUTH_INFO`,
   LOAD_NEAR_PLACES: `LOAD_NEAR_PLACES`,
   SET_REVIEWS: `SET_REVIEWS`,
+  SET_FAVOURITES: `SET_FAVOURITES`,
+  UPDATE_FAVOURITE: `UPDATE_FAVOURITE`,
 
 };
 
@@ -76,7 +80,14 @@ const ActionCreator = {
     type: ActionType.SET_REVIEWS,
     payload: reviews,
   }),
-
+  setFavourites: (favourites) => ({
+    type: ActionType.SET_FAVOURITES,
+    payload: favourites,
+  }),
+  updateFavourite: (favourite) => ({
+    type: ActionType.UPDATE_FAVOURITE,
+    payload: favourite,
+  }),
 };
 
 const Operation = {
@@ -143,9 +154,31 @@ const Operation = {
       });
   },
   postReview: (offerId, comment, rating) => (dispatch, getState, api) => {
-    return api.post(`/comments/${offerId}`, {comment, rating});
+    return api.post(`/comments/${offerId}`, { comment, rating });
   },
-
+  postFavourite: (offerId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${offerId}/${status}`)
+      .then((response) => {
+        dispatch(ActionCreator.updateFavourite(response.data));
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          history.push(PagePath.LOGIN);
+        }
+      });
+  },
+  loadFavourites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const loadedFavourites = response.data.map(createOffers);
+        dispatch(ActionCreator.setFavourites(loadedFavourites));
+      })
+      .catch((error) => {
+        history.push(PagePath.LOGIN);
+        // eslint-disable-next-line no-console
+        console.log(`[FAVOURITES ERROR]`, error.message);
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -186,7 +219,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: action.payload
       });
-
+    case ActionType.SET_FAVOURITES:
+      return extend(state, {
+        favourites: action.payload
+      });
     case ActionType.SET_REVIEWS:
       return extend(state, {
         reviews: action.payload,
@@ -209,4 +245,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {Operation, reducer, ActionType, ActionCreator};
+export { Operation, reducer, ActionType, ActionCreator };

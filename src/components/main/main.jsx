@@ -12,7 +12,7 @@ import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
 import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
-const PlaceListWrapped = withPlaceList(PLaceList);
+export const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
   const {offers, activeCity, authorizationStatus, authInfo, handleOfferChange, activeOfferIndex} = props;
@@ -106,4 +106,5 @@ const mapStateToProps = (state) => {
     activeCity: getActiveCity(state),
   };
 };
+export {Main};
 export default connect(mapStateToProps)(Main);

@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {coordType, cityType, offerType} from "../../types";
@@ -28,6 +28,7 @@ class Coord extends PureComponent {
 
     super(props);
     this._map = null;
+    this._mapRef = createRef();
 
   }
 
@@ -44,7 +45,9 @@ class Coord extends PureComponent {
   _setMap() {
 
     const {activeCity, activeOffer} = this.props;
-    this._map = leaflet.map(`map`, {
+    // this._map = leaflet.map(`map`, {
+    this._map = leaflet.map(this._mapRef.current, {
+
       center: activeCity.coord,
       zoom,
       zoomControl: false,
@@ -82,7 +85,9 @@ class Coord extends PureComponent {
   render() {
 
     return (
-      <div id="map" style={style}></div>
+      // <div id="map" style={style}></div>
+      <div ref={this._mapRef} style={style}></div>
+
     );
 
   }

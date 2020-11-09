@@ -1,13 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {reviewType} from "../../types";
+import {getRating} from '../../utils/functions';
 
 class ReviewItem extends PureComponent {
   constructor(props) {
     super(props);
   }
   render() {
-    const {autor, text, avatar, date} = this.props.reviewItem;
+    const {autor, text, avatar, date, rating} = this.props.reviewItem;
 
     const editingDate = date.toLocaleString(`en-US`, {year: `numeric`, month: `long`});
     const dateTime = `${date.toISOString().substr(0, 10)}`;
@@ -23,7 +24,9 @@ class ReviewItem extends PureComponent {
         <div className="reviews__info">
           <div className="reviews__rating rating">
             <div className="reviews__stars rating__stars">
-              <span style={{width: `80%`}}></span>
+{/*               <span style={{width: `20%`}}></span>
+ */}              <span style={{width: getRating(rating)}}></span>
+
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
