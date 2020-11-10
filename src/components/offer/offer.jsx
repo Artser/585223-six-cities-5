@@ -1,13 +1,13 @@
-import React, {PureComponent} from "react";
+import React, { PureComponent } from "react";
 import ReviewForm from "../review-form/review-form";
 import ReviewList from "../review-list/review-list";
 import Coord from "../coord/coord";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
-import {Operation} from "../../reducer/data";
-import {connect} from "react-redux";
-import {offerType} from "../../types";
-import {Header} from "../header/header";
+import { Operation } from "../../reducer/data";
+import { connect } from "react-redux";
+import { offerType } from "../../types";
+import { Header } from "../header/header";
 // import {getCurrentOffer} from '../../reducer/reselect';
 import NearPlace from "../../components/near-places/near-places";
 const ReviewFormWrapped = withReviewForm(ReviewForm);
@@ -25,24 +25,25 @@ class Offer extends PureComponent {
 
     const id = this.props.match.params.id;
     this.props.loadCurrentOffer(id);
+    this.props.loadNearPlaces(id);
   }
 
 
   render() {
-    const {offer, nearPlaces} = this.props;
+    const { offer, nearPlaces } = this.props;
     if (offer === null) {
       return <p >Loading</p>;
 
     }
 
-    const ImageBlock = ({img}) => {
+    const ImageBlock = ({ img }) => {
       return (
         <div className="property__image-wrapper">
           <img className="property__image" src={img} alt="Photo studio" />
         </div>
       );
     };
-    const Goods = ({good}) => {
+    const Goods = ({ good }) => {
       return (
         <li className="property__inside-item">
           {good}
@@ -89,7 +90,7 @@ class Offer extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
+                    <span style={{ width: `80%` }}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value"> {offer.rating}</span>
@@ -153,10 +154,15 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            <div style={{height: `579px`}}>
+            <div style={{ height: `579px` }}>
               <Coord
-                coords={[]}
+
+
+                coords={nearPlaces.map((nearPlace) => (nearPlace.coord))}
+
+
                 activeOffer={offer.coord}
+
               />
             </div>
           </section>
@@ -186,7 +192,7 @@ class Offer extends PureComponent {
   }
 }
 Offer.propTypes = {
-  match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
+  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }),
   offer: offerType,
   img: PropTypes.object,
   good: PropTypes.string,
@@ -201,16 +207,19 @@ const mapStateToProps = (state) => {
     authorizationStatus: state.authorizationStatus,
     authInfo: state.authInfo,
     // nearPlaces: state.nearPlaces
-    nearPlaces: [{id: 1, type: `room`, title: `room2`, price: 60, imgLink: ``}],
+    nearPlaces: state.nearPlaces,
     // nearPlaces: state.loadNearPlacesId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  loadNearPlaces: (id) => {
+    dispatch(Operation.loadNearPlacesId(id));
+  },
+
   loadCurrentOffer: (id) => {
 
-    dispatch(Operation.loadOfferById(id)
-    );
+    dispatch(Operation.loadOfferById(id));
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Offer);

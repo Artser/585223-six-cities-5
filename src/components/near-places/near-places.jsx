@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 
 
 const NearPlace = (props) => {
-  const {type, title, price} = props;
+  const {type, title, price, imgLink} = props;
   return (
 
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg" width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={imgLink} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">

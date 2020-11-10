@@ -2,7 +2,10 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 export const MAX_REVIEWS_LENGTH = 10;
-
+export const FavoriteStatus = {
+  PLUS: 1,
+  MINUS: 0
+};
 export const getIdFromSityName = (cityName) => {
   switch (cityName) {
     case `Amsterdam`: return 4;

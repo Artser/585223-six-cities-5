@@ -1,9 +1,9 @@
-import React, {PureComponent, createRef} from "react";
+import React, { PureComponent, createRef } from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {coordType, cityType, offerType} from "../../types";
-import {connect} from "react-redux";
-import {getActiveCity} from "../../reducer/reselect";
+import { coordType, cityType, offerType } from "../../types";
+import { connect } from "react-redux";
+import { getActiveCity } from "../../reducer/reselect";
 
 
 const zoom = 12;
@@ -34,8 +34,30 @@ class Coord extends PureComponent {
 
   _drawActivePin(coord) {
     leaflet
-      .marker(coord, {icon: activeIcon, zIndexOffset: 1000})
+      .marker(coord, { icon: activeIcon, zIndexOffset: 1000 })
       .addTo(this._map);
+  }
+
+  _addPinsAndCenter() {
+    const {activeCity, activeOffer, coords } = this.props;
+    coords.forEach((coord) => {
+      leaflet
+        .marker(coord, { icon })
+        .addTo(this._map);
+    });
+
+    if (activeOffer) {
+      this._drawActivePin(activeOffer);
+    }
+    this._map.setView(activeCity.coord, zoom);
+  }
+
+  _removePins() {
+    this._map.eachLayer(function (layer) {
+      if (layer instanceof leaflet.Marker) {
+        layer.remove()
+      }
+    });
   }
 
   _resetMap() {
@@ -44,7 +66,7 @@ class Coord extends PureComponent {
 
   _setMap() {
 
-    const {activeCity, activeOffer} = this.props;
+    const { activeCity, activeOffer } = this.props;
     // this._map = leaflet.map(`map`, {
     this._map = leaflet.map(this._mapRef.current, {
 
@@ -60,10 +82,11 @@ class Coord extends PureComponent {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this._map);
-    const {coords} = this.props;
+    const { coords } = this.props;
+    console.log(coords);
     coords.forEach((coord) => {
       leaflet
-        .marker(coord, {icon})
+        .marker(coord, { icon })
         .addTo(this._map);
     });
 
@@ -74,8 +97,9 @@ class Coord extends PureComponent {
 
 
   componentDidUpdate() {
-    this._resetMap();
-    this._setMap();
+    this._removePins();
+    this._addPinsAndCenter();
+
   }
 
   componentDidMount() {
@@ -96,7 +120,8 @@ Coord.propTypes = {
   coords: PropTypes.arrayOf(coordType),
   activeCity: cityType,
   offer: offerType,
-  activeOffer: PropTypes.array
+  activeOffer: PropTypes.array,
+
 };
 
 const mapStateToProps = (state) => {

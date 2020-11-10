@@ -8,11 +8,9 @@ export const initialState = {
   activeOffer: null,
   offers: [],
   cities: [],
-  nearPlaces: null,
+  nearPlaces: [],
   reviews: [],
   favourites: [],
-
-
   hoveredOffer: null,
   activeSortingType: SORT_TYPES.POPULAR,
   isSortingListOpened: false,
@@ -193,7 +191,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.LOAD_NEAR_PLACES:
       return extend(state, {
-        offers: action.payload
+        nearPlaces: action.payload
       });
     case ActionType.SET_CITIES:
       return extend(state, {
