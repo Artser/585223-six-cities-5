@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 // import {Operation } from "../../reducer/data";
 // import {connect} from "react-redux";
+import {getRating} from '../../utils/functions';
 
 
 const NearPlace = (props) => {
-  const {type, title, price, imgLink} = props;
+  const {type, title, price, imgLink, rating} = props;
   return (
 
     <article className="near-places__card place-card">
@@ -29,7 +30,7 @@ const NearPlace = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: getRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -48,20 +49,8 @@ NearPlace.propTypes = {
   imgLink: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
 
 };
 
-/* const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-
-
-}); */
-
-// export default connect(mapStateToProps, mapDispatchToProps)(NearPlace);
 export default NearPlace;

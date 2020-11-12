@@ -26,6 +26,7 @@ export const createOffers = (offer) => {
       price: offer.price,
       type: offer.type,
       isPremium: offer.is_premium,
+      isFavorite: offer.is_favorite,
       rating: offer.rating,
       coord: [offer.location.latitude, offer.location.longitude],
       city: offer.city.name,

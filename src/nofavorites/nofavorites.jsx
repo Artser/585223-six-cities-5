@@ -14,5 +14,4 @@ const NoFavorites = () => {
 };
 
 
-
 export default NoFavorites;

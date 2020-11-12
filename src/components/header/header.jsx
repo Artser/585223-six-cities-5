@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { AuthorizationStatus, PagePath } from "../../utils/functions";
-import { connect } from "react-redux";
+import {Link} from "react-router-dom";
+import {AuthorizationStatus, PagePath} from "../../utils/functions";
+import {connect} from "react-redux";
 
 export const Header = (props) => {
-  const { authorizationStatus, authInfo } = props;
+  const {authorizationStatus, authInfo} = props;
   return <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -24,7 +24,7 @@ export const Header = (props) => {
                 </div>
                 {
                   authorizationStatus === AuthorizationStatus.AUTH ?
-                    <Link className="header__user-name user__name" to={PagePath.FAVOURITE}>
+                    <Link className="header__user-name user__name" to={PagePath.FAVORITE}>
                       {authInfo ? authInfo.email : ``}
                     </Link>
                     : <Link className="header__login" to={PagePath.LOGIN}>Sign in</Link>

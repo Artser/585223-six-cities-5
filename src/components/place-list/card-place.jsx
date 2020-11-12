@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerType} from "../../types";
+import {getRating} from '../../utils/functions';
 
 const CardPlace = (props) => {
   const {offer, handleHover} = props;
@@ -41,7 +42,7 @@ const CardPlace = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: getRating(offer.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

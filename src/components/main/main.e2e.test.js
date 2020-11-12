@@ -1,13 +1,13 @@
 import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { Main } from "./main";
+import {Main} from "./main";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {PlaceListWrapped} from "./main";
 
 configure({adapter: new Adapter()});
 const offers = [
-{
+  {
     description: `test`,
     id: 1,
     title: `Beautiful & luxurious apartment at graet location`,
@@ -24,7 +24,7 @@ const offers = [
 
 let Paris = {
   name: `2`,
-  coord: [1, 2,3],
+  coord: [1, 2],
   id: 5
 };
 

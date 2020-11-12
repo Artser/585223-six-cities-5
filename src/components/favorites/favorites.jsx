@@ -1,11 +1,12 @@
-import React, { PureComponent } from "react";
-
-import { Header } from "../header/header";
+import React, {PureComponent} from "react";
+import {Header} from "../header/header";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Operation } from "../../reducer/data";
-// import { FavoriteStatus } from "../../utils/functions";
+import {connect} from "react-redux";
+import {Operation} from "../../reducer/data";
+import {FavoriteStatus} from "../../utils/functions";
+// import NoFavorites from "../../nofavorites/nofavorites";
 // import {AuthorizationStatus} from "../../reducer/user/user";
+import {getRating} from '../../utils/functions';
 
 
 class Favorites extends PureComponent {
@@ -16,11 +17,11 @@ class Favorites extends PureComponent {
   }
 
   _prepareOffers() {
-    const {favourites} = this.props;
+    const {favorites} = this.props;
 
     const offers = {};
 
-    favourites.forEach((offer) => {
+    favorites.forEach((offer) => {
       if (!offers[offer.city]) {
         offers[offer.city] = [];
       }
@@ -32,7 +33,13 @@ class Favorites extends PureComponent {
   }
 
   render() {
-    const { authorizationStatus, authInfo } = this.props;
+    const {authorizationStatus, authInfo, updateFavorite} = this.props;
+    // константы для проверки пустоты ниже
+    // const isFavoritePageEmpty = favourites ? false : true;
+    // const classNameForEmptyContainer = isFavoritePageEmpty ? `favorites__status-wrapper` : ``;
+
+    /*
+const classNameForFavoriteTag = isFavoritePageEmpty ? `favorites--empty` : ``; */
 
     const offersByCities = this._prepareOffers();
     return (
@@ -44,6 +51,7 @@ class Favorites extends PureComponent {
 
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
+            {/* </div><section className="favorites ${classNameForFavoriteTag}"> */}
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
@@ -66,7 +74,7 @@ class Favorites extends PureComponent {
                                 <article className="favorites__card place-card" key={offer.id}>
                                   <div className="favorites__image-wrapper place-card__image-wrapper">
                                     <a href="#">
-                                      <img className="place-card__image" src="img/apartment-small-04.jpg" width="150" height="110" alt="Place image" />
+                                      <img className="place-card__image" src={offer.imgLink} width="150" height="110" alt="Place image" />
                                     </a>
                                   </div>
                                   <div className="favorites__card-info place-card__info">
@@ -75,9 +83,7 @@ class Favorites extends PureComponent {
                                         <b className="place-card__price-value">&euro;{offer.price}</b>
                                         <span className="place-card__price-text">&#47;&nbsp;night</span>
                                       </div>
-                                      <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-{/*                                         // onClick={() => updateFavoriteStatus(offer.id, FavoriteStatus.MINUS)}>
- */}
+                                      <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button" onClick={() => updateFavorite(offer.id, FavoriteStatus.MINUS)}>
                                         <svg className="place-card__bookmark-icon" width="18" height="19">
                                           <use xlinkHref="#icon-bookmark"></use>
                                         </svg>
@@ -86,14 +92,14 @@ class Favorites extends PureComponent {
                                     </div>
                                     <div className="place-card__rating rating">
                                       <div className="place-card__stars rating__stars">
-                                        <span style={{ width: `100%` }}></span>
+                                        <span style={{width: getRating(offer.rating)}}></span>
                                         <span className="visually-hidden">Rating</span>
                                       </div>
                                     </div>
                                     <h2 className="place-card__name">
-                                      <a href="#">White castle</a>
+                                      <a href="#">{offer.title}</a>
                                     </h2>
-                                    <p className="place-card__type">Apartment</p>
+                                    <p className="place-card__type">{offer.type}</p>
                                   </div>
                                 </article>
                               );
@@ -119,22 +125,28 @@ class Favorites extends PureComponent {
 }
 
 Favorites.propTypes = {
-  favourites: PropTypes.array,
+  favorites: PropTypes.array,
   authorizationStatus: PropTypes.string,
-  authInfo: PropTypes.object
+  authInfo: PropTypes.object,
+  loadFavorites: PropTypes.func,
+  updateFavorite: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return ({
-    favourites: state.favourites,
+    favorites: state.favorites,
     authorizationStatus: state.authorizationStatus,
     authInfo: state.authInfo,
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  updateFavorite: (offerId, status) => {
+    dispatch(Operation.postFavorite(offerId, status));
+  },
+
   loadFavorites: () => {
-    dispatch(Operation.loadFavourites());
+    dispatch(Operation.loadFavorites());
   }
 });
 

@@ -13,6 +13,7 @@ const withReviewForm = (WrappedComponentForm) => {
       };
       this.handleReview = this.handleReview.bind(this);
       this.handleRating = this.handleRating.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleRating(evt) {
@@ -20,7 +21,10 @@ const withReviewForm = (WrappedComponentForm) => {
 
     }
 
+    handleSubmit() {
+      this.setState({rating: ``, review: ``});
 
+    }
     handleReview(evt) {
       this.setState({review: evt.target.value});
     }
@@ -32,6 +36,7 @@ const withReviewForm = (WrappedComponentForm) => {
         review={this.state.review}
         onRatingChange={this.handleRating}
         onReviewChange={this.handleReview}
+        onFormSubmit={this.handleSubmit}
       />;
     }
   };

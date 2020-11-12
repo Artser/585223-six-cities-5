@@ -1,25 +1,32 @@
-import React, { PureComponent } from "react";
+import React, {PureComponent} from "react";
 import ReviewForm from "../review-form/review-form";
 import ReviewList from "../review-list/review-list";
 import Coord from "../coord/coord";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
-import { Operation } from "../../reducer/data";
-import { connect } from "react-redux";
-import { offerType } from "../../types";
-import { Header } from "../header/header";
+import {Operation} from "../../reducer/data";
+import {connect} from "react-redux";
+import {offerType} from "../../types";
+import {Header} from "../header/header";
 // import {getCurrentOffer} from '../../reducer/reselect';
 import NearPlace from "../../components/near-places/near-places";
+import {FavoriteStatus} from "../../utils/functions";
 const ReviewFormWrapped = withReviewForm(ReviewForm);
+import {getRating} from '../../utils/functions';
 
 
 class Offer extends PureComponent {
   constructor(props) {
 
     super(props);
-
+    this.handleButton = this.handleButton.bind(this);
   }
 
+  handleButton(evt) {
+    evt.preventDefault();
+    const {updateFavorite, offer} = this.props;
+    updateFavorite(offer.id, offer.isFavorite ? FavoriteStatus.MINUS : FavoriteStatus.PLUS);
+  }
 
   componentDidMount() {
 
@@ -30,20 +37,20 @@ class Offer extends PureComponent {
 
 
   render() {
-    const { offer, nearPlaces } = this.props;
+    const {offer, nearPlaces} = this.props;
     if (offer === null) {
       return <p >Loading</p>;
 
     }
-
-    const ImageBlock = ({ img }) => {
+    const bookmarkClass = offer.isFavorite ? `property__bookmark-button--active` : `property__bookmark-button`;
+    const ImageBlock = ({img}) => {
       return (
         <div className="property__image-wrapper">
           <img className="property__image" src={img} alt="Photo studio" />
         </div>
       );
     };
-    const Goods = ({ good }) => {
+    const Goods = ({good}) => {
       return (
         <li className="property__inside-item">
           {good}
@@ -81,7 +88,7 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button onClick={this.handleButton} className={`${bookmarkClass} button`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -90,7 +97,7 @@ class Offer extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `80%` }}></span>
+                    <span style={{width: getRating(offer.rating)}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value"> {offer.rating}</span>
@@ -154,7 +161,7 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            <div style={{ height: `579px` }}>
+            <div style={{height: `579px`}}>
               <Coord
 
 
@@ -178,6 +185,7 @@ class Offer extends PureComponent {
                       title={nearPlace.title}
                       price={nearPlace.price}
                       imgLink={nearPlace.imgLink}
+                      rating={nearPlace.rating}
                     />
                   ))
                 }
@@ -192,11 +200,13 @@ class Offer extends PureComponent {
   }
 }
 Offer.propTypes = {
-  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }),
+  match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
   offer: offerType,
+  updateFavorite: PropTypes.func,
   img: PropTypes.object,
   good: PropTypes.string,
   loadCurrentOffer: PropTypes.func,
+  loadNearPlaces: PropTypes.func,
   authorizationStatus: PropTypes.string,
   authInfo: PropTypes.object,
   nearPlaces: PropTypes.array
@@ -206,13 +216,14 @@ const mapStateToProps = (state) => {
     offer: state.activeOffer,
     authorizationStatus: state.authorizationStatus,
     authInfo: state.authInfo,
-    // nearPlaces: state.nearPlaces
     nearPlaces: state.nearPlaces,
-    // nearPlaces: state.loadNearPlacesId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  updateFavorite: (offerId, status) => {
+    dispatch(Operation.postFavorite(offerId, status));
+  },
   loadNearPlaces: (id) => {
     dispatch(Operation.loadNearPlacesId(id));
   },

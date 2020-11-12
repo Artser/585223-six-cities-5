@@ -24,8 +24,7 @@ class ReviewItem extends PureComponent {
         <div className="reviews__info">
           <div className="reviews__rating rating">
             <div className="reviews__stars rating__stars">
-{/*               <span style={{width: `20%`}}></span>
- */}              <span style={{width: getRating(rating)}}></span>
+              <span style={{width: getRating(rating)}}></span>
 
               <span className="visually-hidden">Rating</span>
             </div>
