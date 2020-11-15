@@ -19,6 +19,13 @@ const offers = [
     coord: [52.3909553943508, 4.85309666406198],
     city: `am`,
     cityId: 10,
+    isFavorite: true,
+    bedrooms: 4,
+    adults: 3,
+    goods: [`tennis`, `room`],
+    avatar: `little`,
+    name: `Angelina`,
+
   },
 ];
 

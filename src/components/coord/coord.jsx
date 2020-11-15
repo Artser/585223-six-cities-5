@@ -98,11 +98,15 @@ class Coord extends PureComponent {
   componentDidUpdate() {
     this._removePins();
     this._addPinsAndCenter();
+    // this._setMap();
+    // setTimeout(this._setMap);
 
   }
 
   componentDidMount() {
     this._setMap();
+    // setTimeout(this._setMap);
+
   }
 
   render() {
@@ -128,6 +132,7 @@ const mapStateToProps = (state) => {
     activeCity: getActiveCity(state),
   };
 };
+export {Coord};
 export default connect(mapStateToProps)(Coord);
 
 
