@@ -25,7 +25,7 @@ describe(`Render ReviewItem`, () => {
     avatar: `img/avatar-angelina.jpg`,
     autor: `Max`,
     rating: 3,
-    date: new Date(),
+    date: new Date(2020, 10, 17, 2, 3, 4, 567),
 
     text: `text`,
   };
