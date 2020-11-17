@@ -40,7 +40,6 @@ class ReviewList extends PureComponent {
 }
 
 ReviewList.propTypes = {
-  // reviewItems: PropTypes.array.isRequired,
   loadCurrentReview: PropTypes.func.isRequired,
   comments: PropTypes.array.isRequired,
   match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
@@ -64,4 +63,5 @@ const mapDispatchToProps = (dispatch) => ({
     );
   }
 });
+export {ReviewList};
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReviewList));

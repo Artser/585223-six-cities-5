@@ -45,12 +45,12 @@ const NearPlace = (props) => {
 
 
 NearPlace.propTypes = {
-  title: PropTypes.string.isRequired,
-  imgLink: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  imgLink: PropTypes.string,
+  price: PropTypes.number,
+  type: PropTypes.string,
   rating: PropTypes.number,
 
 };
-
+export {NearPlace};
 export default NearPlace;

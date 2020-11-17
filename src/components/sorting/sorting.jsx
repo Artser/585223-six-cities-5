@@ -57,4 +57,5 @@ const mapDispatchToProps = (dispatch) => ({
   toggleSortingList: (isOpened) => () => dispatch(ActionCreator.toggleSorting(isOpened)),
 });
 
+export {Sorting};
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

@@ -29,7 +29,6 @@ class Coord extends PureComponent {
     super(props);
     this._map = null;
     this._mapRef = createRef();
-
   }
 
   _drawActivePin(coord) {
@@ -67,7 +66,6 @@ class Coord extends PureComponent {
   _setMap() {
 
     const {activeCity, activeOffer} = this.props;
-    // this._map = leaflet.map(`map`, {
     this._map = leaflet.map(this._mapRef.current, {
 
       center: activeCity.coord,
@@ -98,21 +96,15 @@ class Coord extends PureComponent {
   componentDidUpdate() {
     this._removePins();
     this._addPinsAndCenter();
-    // this._setMap();
-    // setTimeout(this._setMap);
-
   }
 
   componentDidMount() {
     this._setMap();
-    // setTimeout(this._setMap);
-
   }
 
   render() {
 
     return (
-      // <div id="map" style={style}></div>
       <div ref={this._mapRef} style={style}></div>
 
     );
@@ -120,8 +112,8 @@ class Coord extends PureComponent {
   }
 }
 Coord.propTypes = {
-  coords: PropTypes.arrayOf(coordType),
-  activeCity: cityType,
+  coords: PropTypes.arrayOf(coordType).isRequired,
+  activeCity: cityType.isRequired,
   offer: offerType,
   activeOffer: PropTypes.array,
 

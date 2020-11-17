@@ -9,7 +9,6 @@ class ReviewItem extends PureComponent {
   }
   render() {
     const {autor, text, avatar, date, rating} = this.props.reviewItem;
-
     const editingDate = date.toLocaleString(`en-US`, {year: `numeric`, month: `long`});
     const dateTime = `${date.toISOString().substr(0, 10)}`;
 

@@ -9,8 +9,6 @@ import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
 import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
-// import { Link } from "react-router-dom";
-// import { AuthorizationStatus } from "../../reducer/user/user";
 import {Header} from "../header/header";
 
 export const PlaceListWrapped = withPlaceList(PLaceList);

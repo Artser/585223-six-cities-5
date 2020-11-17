@@ -39,5 +39,6 @@ const mapStateToProps = (state) => {
 
   };
 };
+export {PLaceList};
 export default connect(mapStateToProps)(PLaceList);
 

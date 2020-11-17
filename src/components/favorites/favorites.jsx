@@ -1,12 +1,10 @@
-import React, { PureComponent } from "react";
-import { Header } from "../header/header";
+import React, {PureComponent} from "react";
+import {Header} from "../header/header";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Operation } from "../../reducer/data";
-import { FavoriteStatus } from "../../utils/functions";
-// import NoFavorites from "../../nofavorites/nofavorites";
-// import {AuthorizationStatus} from "../../reducer/user/user";
-import { getRating } from '../../utils/functions';
+import {connect} from "react-redux";
+import {Operation} from "../../reducer/data";
+import {FavoriteStatus} from "../../utils/functions";
+import {getRating} from '../../utils/functions';
 
 
 class Favorites extends PureComponent {
@@ -17,7 +15,7 @@ class Favorites extends PureComponent {
   }
 
   _prepareOffers() {
-    const { favorites } = this.props;
+    const {favorites} = this.props;
 
     const offers = {};
 
@@ -33,7 +31,7 @@ class Favorites extends PureComponent {
   }
 
   render() {
-    const { authorizationStatus, authInfo, updateFavorite, favorites } = this.props;
+    const {authorizationStatus, authInfo, updateFavorite, favorites} = this.props;
     // константы для проверки пустоты ниже
 
     const isEmpty = !favorites.length;
@@ -51,7 +49,6 @@ class Favorites extends PureComponent {
 
         <main className={`page__main page__main--favorites ${classNameForMain}`}>
           <div className="page__favorites-container container">
-            {/* </div><section className="favorites ${classNameForFavoriteTag}"> */}
             <section className={`favorites ${classNameForFavoriteSection}`}>
               {isEmpty ?
                 <React.Fragment>
@@ -102,7 +99,7 @@ class Favorites extends PureComponent {
                                         </div>
                                         <div className="place-card__rating rating">
                                           <div className="place-card__stars rating__stars">
-                                            <span style={{ width: getRating(offer.rating) }}></span>
+                                            <span style={{width: getRating(offer.rating)}}></span>
                                             <span className="visually-hidden">Rating</span>
                                           </div>
                                         </div>
@@ -161,5 +158,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadFavorites());
   }
 });
-
+export {Favorites};
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

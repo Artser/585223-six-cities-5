@@ -233,4 +233,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadOfferById(id));
   }
 });
+export {Offer};
 export default connect(mapStateToProps, mapDispatchToProps)(Offer);

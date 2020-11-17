@@ -16,5 +16,5 @@ const NoOffers = ({city}) => {
 NoOffers.propTypes = {
   city: PropTypes.string.isRequired,
 };
-
+export {NoOffers};
 export default NoOffers;
