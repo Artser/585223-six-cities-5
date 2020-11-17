@@ -1,4 +1,4 @@
-import {extend, SORT_TYPES} from "../utils/functions";
+import {extend, PagePath, SORT_TYPES, MAX_REVIEWS_LENGTH} from "../utils/functions";
 import {createOffers, createComments} from "../adapters/offers";
 import {createCity} from "../adapters/cities";
 import {AuthorizationStatus} from "./user/user";
@@ -8,9 +8,9 @@ export const initialState = {
   activeOffer: null,
   offers: [],
   cities: [],
-  nearPlaces: null,
+  nearPlaces: [],
   reviews: [],
-
+  favorites: [],
   hoveredOffer: null,
   activeSortingType: SORT_TYPES.POPULAR,
   isSortingListOpened: false,
@@ -32,6 +32,8 @@ const ActionType = {
   SET_AUTH_INFO: `SET_AUTH_INFO`,
   LOAD_NEAR_PLACES: `LOAD_NEAR_PLACES`,
   SET_REVIEWS: `SET_REVIEWS`,
+  SET_FAVORITES: `SET_FAVORITES`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
 
 };
 
@@ -76,7 +78,14 @@ const ActionCreator = {
     type: ActionType.SET_REVIEWS,
     payload: reviews,
   }),
-
+  setFavorites: (favorites) => ({
+    type: ActionType.SET_FAVORITES,
+    payload: favorites,
+  }),
+  updateFavorite: (favorite) => ({
+    type: ActionType.UPDATE_FAVORITE,
+    payload: favorite,
+  }),
 };
 
 const Operation = {
@@ -117,11 +126,17 @@ const Operation = {
   loadCommentsByOfferId: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
+        // const adapterComments = response.data.map((comment) => createComments(comment));
+        // dispatch(ActionCreator.loadCommentsByOfferId(adapterComments));
 
-        const adapterComments = response.data.map((comment) => createComments(comment));
-
-
-        dispatch(ActionCreator.loadCommentsByOfferId(adapterComments));
+        dispatch(
+            ActionCreator.loadCommentsByOfferId(
+                response.data
+              .slice(Math.max(response.data.length - MAX_REVIEWS_LENGTH, 0))
+              .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+              .map(createComments)
+            )
+        );
 
       }).catch((error) => {
         // eslint-disable-next-line no-console
@@ -143,9 +158,46 @@ const Operation = {
       });
   },
   postReview: (offerId, comment, rating) => (dispatch, getState, api) => {
-    return api.post(`/comments/${offerId}`, {comment, rating});
+    return api.post(`/comments/${offerId}`, {comment, rating})
+      .then((response) => {
+        const adapterComments = response.data.map((item) => createComments(item));
+
+        dispatch(ActionCreator.setReviews(adapterComments));
+
+      });
   },
 
+  postFavorite: (offerId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${offerId}/${status}`)
+      .then((response) => {
+        const {favorites, offers} = getState();
+
+        const newFavorite = createOffers(response.data);
+        const newFavorites = favorites.filter((item) => item.id !== newFavorite.id);
+        offers.find((item) => item.id === newFavorite.id).isFavorite = newFavorite.isFavorite;
+        dispatch(ActionCreator.loadOffers(offers));
+        dispatch(ActionCreator.setActiveOffer(newFavorite));
+
+        dispatch(ActionCreator.setFavorites(newFavorites));
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          history.push(PagePath.LOGIN);
+        }
+      });
+  },
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const loadedFavorites = response.data.map(createOffers);
+        dispatch(ActionCreator.setFavorites(loadedFavorites));
+      })
+      .catch((error) => {
+        history.push(PagePath.LOGIN);
+        // eslint-disable-next-line no-console
+        console.log(`[FAVOURITES ERROR]`, error.message);
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -160,7 +212,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.LOAD_NEAR_PLACES:
       return extend(state, {
-        offers: action.payload
+        nearPlaces: action.payload
       });
     case ActionType.SET_CITIES:
       return extend(state, {
@@ -186,10 +238,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: action.payload
       });
+    case ActionType.SET_FAVORITES:
+      return extend(state, {
+        favorites: action.payload
+      });
 
     case ActionType.SET_REVIEWS:
       return extend(state, {
-        reviews: action.payload,
+        comments: action.payload,
       });
     case ActionType.SET_AUTH_INFO:
 

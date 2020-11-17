@@ -2,16 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 // import {Operation } from "../../reducer/data";
 // import {connect} from "react-redux";
+import {getRating} from '../../utils/functions';
 
 
 const NearPlace = (props) => {
-  const {type, title, price} = props;
+  const {type, title, price, imgLink, rating} = props;
   return (
 
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg" width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={imgLink} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -29,7 +30,7 @@ const NearPlace = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: getRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -44,24 +45,12 @@ const NearPlace = (props) => {
 
 
 NearPlace.propTypes = {
-  title: PropTypes.string.isRequired,
-  imgLink: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  title: PropTypes.string,
+  imgLink: PropTypes.string,
+  price: PropTypes.number,
+  type: PropTypes.string,
+  rating: PropTypes.number,
 
 };
-
-/* const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-
-
-}); */
-
-// export default connect(mapStateToProps, mapDispatchToProps)(NearPlace);
+export {NearPlace};
 export default NearPlace;

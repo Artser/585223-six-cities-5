@@ -2,7 +2,10 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 export const MAX_REVIEWS_LENGTH = 10;
-
+export const FavoriteStatus = {
+  PLUS: 1,
+  MINUS: 0
+};
 export const getIdFromSityName = (cityName) => {
   switch (cityName) {
     case `Amsterdam`: return 4;
@@ -46,4 +49,8 @@ export const getSortedOffers = (offers, activeSort) => {
     default:
       return offers.slice();
   }
+};
+export const getRating = (rating) => {
+  const roundRating = Math.round(rating);
+  return roundRating > 0 && roundRating <= 5 ? `${roundRating * 20}%` : false;
 };

@@ -1,7 +1,7 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {coordType, cityType} from "../../types";
+import {coordType, cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import {getActiveCity} from "../../reducer/reselect";
 
@@ -11,6 +11,12 @@ const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
 });
+
+const activeIcon = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
 const style = {
   height: `100%`,
   width: `100%`,
@@ -22,7 +28,35 @@ class Coord extends PureComponent {
 
     super(props);
     this._map = null;
+    this._mapRef = createRef();
+  }
 
+  _drawActivePin(coord) {
+    leaflet
+      .marker(coord, {icon: activeIcon, zIndexOffset: 1000})
+      .addTo(this._map);
+  }
+
+  _addPinsAndCenter() {
+    const {activeCity, activeOffer, coords} = this.props;
+    coords.forEach((coord) => {
+      leaflet
+        .marker(coord, {icon})
+        .addTo(this._map);
+    });
+
+    if (activeOffer) {
+      this._drawActivePin(activeOffer);
+    }
+    this._map.setView(activeCity.coord, zoom);
+  }
+
+  _removePins() {
+    this._map.eachLayer(function (layer) {
+      if (layer instanceof leaflet.Marker) {
+        layer.remove();
+      }
+    });
   }
 
   _resetMap() {
@@ -30,8 +64,10 @@ class Coord extends PureComponent {
   }
 
   _setMap() {
-    const {activeCity} = this.props;
-    this._map = leaflet.map(`map`, {
+
+    const {activeCity, activeOffer} = this.props;
+    this._map = leaflet.map(this._mapRef.current, {
+
       center: activeCity.coord,
       zoom,
       zoomControl: false,
@@ -50,12 +86,16 @@ class Coord extends PureComponent {
         .marker(coord, {icon})
         .addTo(this._map);
     });
+
+    if (activeOffer) {
+      this._drawActivePin(activeOffer);
+    }
   }
 
 
   componentDidUpdate() {
-    this._resetMap();
-    this._setMap();
+    this._removePins();
+    this._addPinsAndCenter();
   }
 
   componentDidMount() {
@@ -65,22 +105,26 @@ class Coord extends PureComponent {
   render() {
 
     return (
-      <div id="map" style={style}></div>
+      <div ref={this._mapRef} style={style}></div>
+
     );
 
   }
 }
 Coord.propTypes = {
-  coords: PropTypes.arrayOf(coordType),
-  activeCity: cityType,
+  coords: PropTypes.arrayOf(coordType).isRequired,
+  activeCity: cityType.isRequired,
+  offer: offerType,
+  activeOffer: PropTypes.array,
+
 };
 
 const mapStateToProps = (state) => {
   return {
     activeCity: getActiveCity(state),
-
   };
 };
+export {Coord};
 export default connect(mapStateToProps)(Coord);
 
 

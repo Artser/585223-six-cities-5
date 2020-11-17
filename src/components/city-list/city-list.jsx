@@ -64,5 +64,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setActiveCity(id));
   }
 });
-
+export {CitiesList};
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

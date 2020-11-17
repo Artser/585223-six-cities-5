@@ -5,49 +5,30 @@ import {cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import CitiesList from "../city-list/city-list";
 import withPlaceList from "../../hocs/with-place-list";
-
 import PLaceList from "../place-list/place-list";
 import NoOffers from '../no-offers/no-offers';
 import Sorting from "../sorting/sorting";
 import {getActiveCity, getFilteredOffers} from "../../reducer/reselect";
-import {Link} from "react-router-dom";
-import {AuthorizationStatus} from "../../reducer/user/user";
-// import {ActionCreator} from '../../reducer/user/user';
+import {Header} from "../header/header";
 
-const PlaceListWrapped = withPlaceList(PLaceList);
+export const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
-  const {offers, activeCity, authorizationStatus, authInfo} = props;
+  const {offers, activeCity, authorizationStatus, authInfo, handleOfferChange, activeOfferIndex} = props;
   // константы для проверки пустоты ниже
   const isMainPageEmpty = offers.length ? false : true;
   const classNameForMainTag = isMainPageEmpty ? `page__main--index-empty` : ``;
   const classNameForPlaceContainer = isMainPageEmpty ? `cities__places-container--empty` : ``;
   const classNameForSection = isMainPageEmpty ? `cities__no-places` : `cities__places places`;
+  const activeOffer = offers.find((offer) => offer.id === activeOfferIndex);
+
 
   return <div className="page page--gray page--main">
 
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-            </a>
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link to="/login" className="header__nav-link header__nav-link--profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__login">{ authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : `Sign In`}</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
+    <Header
+      authorizationStatus={authorizationStatus}
+      authInfo={authInfo}
+    />
 
     <main className={`page__main page__main--index ${classNameForMainTag}`}>
       <h1 className="visually-hidden">Cities</h1>
@@ -65,6 +46,7 @@ const Main = (props) => {
 
                 <PlaceListWrapped
                   offers={offers}
+                  onHover={handleOfferChange}
                 />
               </React.Fragment>
             }
@@ -76,6 +58,7 @@ const Main = (props) => {
               : <Coord
                 coords={offers.map(({coord}) => coord)}
                 activeCity={activeCity}
+                activeOffer={activeOffer && activeOffer.coord}
               />}
 
           </div>
@@ -89,6 +72,8 @@ Main.propTypes = {
   activeCity: cityType,
   authorizationStatus: PropTypes.string,
   authInfo: PropTypes.object,
+  handleOfferChange: PropTypes.func,
+  activeOfferIndex: PropTypes.number,
 
 };
 
@@ -102,4 +87,5 @@ const mapStateToProps = (state) => {
     activeCity: getActiveCity(state),
   };
 };
+export {Main};
 export default connect(mapStateToProps)(Main);

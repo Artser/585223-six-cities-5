@@ -10,21 +10,29 @@ import {offerType} from "../../types";
 import {Header} from "../header/header";
 // import {getCurrentOffer} from '../../reducer/reselect';
 import NearPlace from "../../components/near-places/near-places";
+import {FavoriteStatus} from "../../utils/functions";
 const ReviewFormWrapped = withReviewForm(ReviewForm);
+import {getRating} from '../../utils/functions';
 
 
 class Offer extends PureComponent {
   constructor(props) {
 
     super(props);
-
+    this.handleButton = this.handleButton.bind(this);
   }
 
+  handleButton(evt) {
+    evt.preventDefault();
+    const {updateFavorite, offer} = this.props;
+    updateFavorite(offer.id, offer.isFavorite ? FavoriteStatus.MINUS : FavoriteStatus.PLUS);
+  }
 
   componentDidMount() {
 
     const id = this.props.match.params.id;
     this.props.loadCurrentOffer(id);
+    this.props.loadNearPlaces(id);
   }
 
 
@@ -34,7 +42,7 @@ class Offer extends PureComponent {
       return <p >Loading</p>;
 
     }
-
+    const bookmarkClass = offer.isFavorite ? `property__bookmark-button--active` : `property__bookmark-button`;
     const ImageBlock = ({img}) => {
       return (
         <div className="property__image-wrapper">
@@ -80,7 +88,7 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button onClick={this.handleButton} className={`${bookmarkClass} button`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -89,7 +97,7 @@ class Offer extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
+                    <span style={{width: getRating(offer.rating)}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value"> {offer.rating}</span>
@@ -155,7 +163,13 @@ class Offer extends PureComponent {
             </div>
             <div style={{height: `579px`}}>
               <Coord
-                coords={[offer.coord]}
+
+
+                coords={nearPlaces.map((nearPlace) => (nearPlace.coord))}
+
+
+                activeOffer={offer.coord}
+
               />
             </div>
           </section>
@@ -171,6 +185,7 @@ class Offer extends PureComponent {
                       title={nearPlace.title}
                       price={nearPlace.price}
                       imgLink={nearPlace.imgLink}
+                      rating={nearPlace.rating}
                     />
                   ))
                 }
@@ -187,9 +202,11 @@ class Offer extends PureComponent {
 Offer.propTypes = {
   match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
   offer: offerType,
+  updateFavorite: PropTypes.func,
   img: PropTypes.object,
   good: PropTypes.string,
   loadCurrentOffer: PropTypes.func,
+  loadNearPlaces: PropTypes.func,
   authorizationStatus: PropTypes.string,
   authInfo: PropTypes.object,
   nearPlaces: PropTypes.array
@@ -199,16 +216,22 @@ const mapStateToProps = (state) => {
     offer: state.activeOffer,
     authorizationStatus: state.authorizationStatus,
     authInfo: state.authInfo,
-    nearPlaces: [{id: 1, type: `room`, title: `room2`, price: 60, imgLink: ``}],
-    // nearPlaces: state.loadNearPlacesId,
+    nearPlaces: state.nearPlaces,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  updateFavorite: (offerId, status) => {
+    dispatch(Operation.postFavorite(offerId, status));
+  },
+  loadNearPlaces: (id) => {
+    dispatch(Operation.loadNearPlacesId(id));
+  },
+
   loadCurrentOffer: (id) => {
 
-    dispatch(Operation.loadOfferById(id)
-    );
+    dispatch(Operation.loadOfferById(id));
   }
 });
+export {Offer};
 export default connect(mapStateToProps, mapDispatchToProps)(Offer);

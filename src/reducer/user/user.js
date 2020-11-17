@@ -45,9 +45,10 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setAuthInfo(response.data));
       })
-      .catch((error) => {
+      .catch(() => {
         // eslint-disable-next-line no-console
-        console.error(`[AUTH ERROR]`, error.message);
+        console.log(`Not register`);
+
       });
   },
   login: (email, password) => (dispatch, getState, api) => {

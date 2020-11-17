@@ -97,4 +97,5 @@ Login.propTypes = {
   authorizationStatus: PropTypes.string
 
 };
+export {Login};
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
