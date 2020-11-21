@@ -1,12 +1,13 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/user/user";
+import {Operation} from "../../reducer/data";
 import PropTypes from 'prop-types';
 import {AuthorizationStatus, PagePath} from "../../utils/functions";
 import {Redirect} from "react-router-dom";
+import {Header} from "../header/header";
 
-const Login = ({email, password, login, handlePassword, handleEmail, authorizationStatus}) => {
+const Login = ({email, password, login, handlePassword, handleEmail, authorizationStatus, authInfo}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     login(email, password);
@@ -18,28 +19,10 @@ const Login = ({email, password, login, handlePassword, handleEmail, authorizati
   }
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header
+        authorizationStatus={authorizationStatus}
+        authInfo={authInfo}
+      />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -48,7 +31,7 @@ const Login = ({email, password, login, handlePassword, handleEmail, authorizati
             <form className="login__form form" action="#" method="post">
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input onChange={ handleEmail} className="login__input form__input" type="email" value={email} name="email" placeholder="Email" required="" />
+                <input onChange={handleEmail} className="login__input form__input" type="email" value={email} name="email" placeholder="Email" required="" />
 
 
               </div>
@@ -94,7 +77,8 @@ Login.propTypes = {
   login: PropTypes.func,
   handlePassword: PropTypes.func,
   handleEmail: PropTypes.func,
-  authorizationStatus: PropTypes.string
+  authorizationStatus: PropTypes.string,
+  authInfo: PropTypes.object,
 
 };
 export {Login};

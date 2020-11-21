@@ -198,7 +198,9 @@ exports[`Render Offer Render Offer 1`] = `
             >
               <li
                 className="property__inside-item"
-              />
+              >
+                goods
+              </li>
             </ul>
           </div>
           <div
@@ -243,14 +245,6 @@ exports[`Render Offer Render Offer 1`] = `
             className="property__reviews reviews"
           >
             <ReviewList />
-            <ReviewForm
-              id="5"
-              onFormSubmit={[Function]}
-              onRatingChange={[Function]}
-              onReviewChange={[Function]}
-              rating={0}
-              review=""
-            />
           </section>
         </div>
       </div>

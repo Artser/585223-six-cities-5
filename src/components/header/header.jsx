@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {AuthorizationStatus, PagePath} from "../../utils/functions";
 import {connect} from "react-redux";
 
-export const Header = (props) => {
+const Header = (props) => {
   const {authorizationStatus, authInfo} = props;
   return <header className="header">
     <div className="container">
@@ -55,5 +55,5 @@ const mapStateToProps = (state) => {
 
   };
 };
-// export {Header};
+export {Header};
 export default connect(mapStateToProps)(Header);

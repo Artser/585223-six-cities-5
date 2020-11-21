@@ -1,4 +1,4 @@
-const months = [
+/* const months = [
   `January`,
   `February`,
   `March`,
@@ -25,3 +25,4 @@ export const mapReviews = (review) => {
     date: `${months[dateObject.getUTCMonth() - 1]} ${dateObject.getUTCFullYear()}`,
   };
 };
+ */

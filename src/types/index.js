@@ -6,8 +6,8 @@ export const reviewType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   offerId: PropTypes.number.isRequired,
   avatar: PropTypes.string.isRequired,
-  autor: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  author: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
   date: PropTypes.object.isRequired,
 
   text: PropTypes.string.isRequired,

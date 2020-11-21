@@ -6,7 +6,7 @@ export const FavoriteStatus = {
   PLUS: 1,
   MINUS: 0
 };
-export const getIdFromSityName = (cityName) => {
+export const getIdFromCityName = (cityName) => {
   switch (cityName) {
     case `Amsterdam`: return 4;
     case `Hamburg`: return 5;

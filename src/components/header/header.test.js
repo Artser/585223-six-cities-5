@@ -7,7 +7,7 @@ import {Header} from './header';
 it(`Header render correctly with active feature`, () => {
   const tree = renderer.create(<MemoryRouter>
     <Header
-      authInfo={false}
+      authInfo={null}
       authorizationStatus={AuthorizationStatus.NO_AUTH}
     />
   </MemoryRouter>

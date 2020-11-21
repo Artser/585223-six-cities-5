@@ -15,8 +15,7 @@ export const PlaceListWrapped = withPlaceList(PLaceList);
 
 const Main = (props) => {
   const {offers, activeCity, authorizationStatus, authInfo, handleOfferChange, activeOfferIndex} = props;
-  // константы для проверки пустоты ниже
-  const isMainPageEmpty = offers.length ? false : true;
+  const isMainPageEmpty = !offers.length;
   const classNameForMainTag = isMainPageEmpty ? `page__main--index-empty` : ``;
   const classNameForPlaceContainer = isMainPageEmpty ? `cities__places-container--empty` : ``;
   const classNameForSection = isMainPageEmpty ? `cities__no-places` : `cities__places places`;

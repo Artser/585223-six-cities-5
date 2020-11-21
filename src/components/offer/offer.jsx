@@ -8,9 +8,8 @@ import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
 import {offerType} from "../../types";
 import {Header} from "../header/header";
-// import {getCurrentOffer} from '../../reducer/reselect';
 import NearPlace from "../../components/near-places/near-places";
-import {FavoriteStatus} from "../../utils/functions";
+import {AuthorizationStatus, FavoriteStatus} from "../../utils/functions";
 const ReviewFormWrapped = withReviewForm(ReviewForm);
 import {getRating} from '../../utils/functions';
 
@@ -153,10 +152,11 @@ class Offer extends PureComponent {
                 <section className="property__reviews reviews">
                   <ReviewList
                   />
+                  {this.props.authorizationStatus === AuthorizationStatus.AUTH &&
+                    <ReviewFormWrapped
 
-                  <ReviewFormWrapped
-                    id={this.props.match.params.id}
-                  />
+                      id={this.props.match.params.id}
+                    />}
 
                 </section>
               </div>

@@ -1,21 +1,12 @@
-import {getIdFromSityName} from '../utils/functions';
-
-const sixImage = (images) => {
+import {getIdFromCityName} from '../utils/functions';
+const IMAGE_COUNT = 6;
+const getImages = (images, count) => {
   let items = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < count; i++) {
     items.push(images[i]);
   }
   return items;
 };
-
-const threeImages = (images) => {
-  let items = [];
-  for (let i = 0; i < 3; i++) {
-    items.push(images[i]);
-  }
-  return items;
-};
-
 
 export const createOffers = (offer) => {
   return (
@@ -30,15 +21,14 @@ export const createOffers = (offer) => {
       rating: offer.rating,
       coord: [offer.location.latitude, offer.location.longitude],
       city: offer.city.name,
-      cityId: getIdFromSityName(offer.city.name),
+      cityId: getIdFromCityName(offer.city.name),
       adults: offer.max_adults,
       bedrooms: offer.bedrooms,
       description: offer.description,
-      images: sixImage(offer.images),
+      images: getImages(offer.images, IMAGE_COUNT),
       goods: offer.goods,
       avatar: offer.host.avatar_url,
       name: offer.host.name,
-      threeImages: threeImages(offer.images)
     }
   );
 };
@@ -49,7 +39,7 @@ export const createComments = (comment) => {
     {
       id: comment.id,
       avatar: comment.user.avatar_url,
-      autor: comment.user.name,
+      author: comment.user.name,
       rating: comment.rating,
       date: new Date(comment.date),
       text: comment.comment

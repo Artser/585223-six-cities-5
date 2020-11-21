@@ -1,7 +1,7 @@
-import {getIdFromSityName} from '../utils/functions';
+import {getIdFromCityName} from '../utils/functions';
 export const createCity = (offer) => {
   return {
-    id: getIdFromSityName(offer.city.name),
+    id: getIdFromCityName(offer.city.name),
     name: offer.city.name,
     coord: [offer.city.location.latitude, offer.city.location.longitude]
   };

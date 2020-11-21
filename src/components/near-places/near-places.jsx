@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import {Operation } from "../../reducer/data";
-// import {connect} from "react-redux";
 import {getRating} from '../../utils/functions';
 
 

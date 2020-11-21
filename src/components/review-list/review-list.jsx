@@ -3,12 +3,11 @@ import ReviewItem from "../review-item/review-item";
 import PropTypes from "prop-types";
 import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 
 class ReviewList extends PureComponent {
   constructor(props) {
     super(props);
-
   }
 
 

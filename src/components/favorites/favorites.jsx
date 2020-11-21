@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Operation} from "../../reducer/data";
 import {FavoriteStatus} from "../../utils/functions";
 import {getRating} from '../../utils/functions';
+import {Link} from "react-router-dom";
 
 
 class Favorites extends PureComponent {
@@ -32,7 +33,6 @@ class Favorites extends PureComponent {
 
   render() {
     const {authorizationStatus, authInfo, updateFavorite, favorites} = this.props;
-    // константы для проверки пустоты ниже
 
     const isEmpty = !favorites.length;
     const classNameForDiv = isEmpty ? `page--favorites-empty` : ``;
@@ -124,9 +124,9 @@ class Favorites extends PureComponent {
           </div >
         </main >
         <footer className="footer container">
-          <a className="footer__logo-link" href="main.html">
+          <Link to="/" className="footer__logo-link" href="main.html">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-          </a>
+          </Link>
         </footer>
       </div >
     );

@@ -27,7 +27,7 @@ describe(`Render Offer`, () => {
     price: 134,
     type: `test`,
     rating: 2.2,
-    goods: [test],
+    goods: [`goods`],
     threeImages: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
     title: `The house among olive`
   };

@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {ActionCreator as UserAction, Operation as UserOperation} from "./reducer/user/user";
-
+import {ActionCreator as UserAction, Operation as UserOperation} from "./reducer/data";
 import {Provider} from "react-redux";
 import App from "./components/app/app";
 import {createStore, applyMiddleware} from 'redux';
@@ -16,7 +15,7 @@ const api = createAPI(() => {
 });
 
 const store = createStore(
-    reducer, /* preloadedState, */
+    reducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api))
     )

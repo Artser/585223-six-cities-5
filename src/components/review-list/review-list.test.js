@@ -10,9 +10,9 @@ describe(`Render ReviewList`, () => {
     id: 5,
     offerId: 3,
     avatar: `img/avatar-angelina.jpg`,
-    autor: `Max`,
+    author: `Max`,
     rating: 3,
-    date: new Date(),
+    date: new Date(2020, 10, 17, 2, 3, 4, 567),
 
     text: `text`,
   }];

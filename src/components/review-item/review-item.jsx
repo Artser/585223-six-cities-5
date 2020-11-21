@@ -8,7 +8,7 @@ class ReviewItem extends PureComponent {
     super(props);
   }
   render() {
-    const {autor, text, avatar, date, rating} = this.props.reviewItem;
+    const {author, text, avatar, date, rating} = this.props.reviewItem;
     const editingDate = date.toLocaleString(`en-US`, {year: `numeric`, month: `long`});
     const dateTime = `${date.toISOString().substr(0, 10)}`;
 
@@ -18,7 +18,7 @@ class ReviewItem extends PureComponent {
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
             <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar" />
           </div>
-          <span className="reviews__user-name">{autor}</span>
+          <span className="reviews__user-name">{author}</span>
         </div>
         <div className="reviews__info">
           <div className="reviews__rating rating">

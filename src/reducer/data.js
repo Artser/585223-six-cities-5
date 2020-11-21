@@ -1,7 +1,12 @@
 import {extend, PagePath, SORT_TYPES, MAX_REVIEWS_LENGTH} from "../utils/functions";
 import {createOffers, createComments} from "../adapters/offers";
 import {createCity} from "../adapters/cities";
-import {AuthorizationStatus} from "./user/user";
+import history from "../utils/history";
+
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
 
 export const initialState = {
   activeCityId: undefined,
@@ -50,10 +55,13 @@ const ActionCreator = {
     type: ActionType.SET_CITIES,
     payload: cities,
   }),
-  setActiveOffer: (offer) => ({
-    type: ActionType.SET_ACTIVE_OFFER,
-    payload: offer,
-  }),
+  setActiveOffer: (offer) => {
+    return {
+      type: ActionType.SET_ACTIVE_OFFER,
+      payload: offer,
+    };
+  },
+
   loadCommentsByOfferId: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
@@ -66,22 +74,28 @@ const ActionCreator = {
     type: ActionType.TOGGLE_SORTING_LIST,
     payload: !isOpened
   }),
-  getHoveredOffer: (offer) => ({
-    type: ActionType.GET_HOVERED_OFFER,
-    payload: offer,
-  }),
+
   loadNearPlacesId: (offers) => ({
     type: ActionType.LOAD_NEAR_PLACES,
     payload: offers,
+  }),
+  setAuthInfo: (info) => ({
+    type: ActionType.SET_AUTH_INFO,
+    payload: info,
   }),
   setReviews: (reviews) => ({
     type: ActionType.SET_REVIEWS,
     payload: reviews,
   }),
-  setFavorites: (favorites) => ({
-    type: ActionType.SET_FAVORITES,
-    payload: favorites,
-  }),
+
+
+  setFavorites: (favorites) => {
+    return {
+      type: ActionType.SET_FAVORITES, payload: favorites
+    };
+  },
+
+
   updateFavorite: (favorite) => ({
     type: ActionType.UPDATE_FAVORITE,
     payload: favorite,
@@ -108,6 +122,31 @@ const Operation = {
         console.error(`[HOTELS ERROR]`, error.message);
       });
 
+  },
+  checkAuthStatus: () => (dispatch, getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        dispatch(ActionCreator.setAuthInfo(response.data));
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.log(`Not register`);
+
+      });
+  },
+  login: (email, password) => (dispatch, getState, api) => {
+    return api.post(`/login`, {
+      email,
+      password,
+
+    }) // {}
+          .then((response) => {
+            dispatch(ActionCreator.setAuthInfo(response.data));
+          })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(`[LOGIN ERROR]`, error.message);
+      });
   },
   loadOfferById: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels/${id}`)
@@ -247,6 +286,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         comments: action.payload,
       });
+
     case ActionType.SET_AUTH_INFO:
 
       if (action.payload) {

@@ -9,16 +9,22 @@ const withReviewForm = (WrappedComponentForm) => {
       super(props);
       this.state = {
         review: ``,
-        rating: 0
+        rating: `0`,
+        error: false
       };
       this.handleReview = this.handleReview.bind(this);
       this.handleRating = this.handleRating.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.setError = this.setError.bind(this);
     }
 
     handleRating(evt) {
       this.setState({rating: evt.target.value});
 
+    }
+
+    setError(error) {
+      this.setState({error});
     }
 
     handleSubmit() {
@@ -37,6 +43,8 @@ const withReviewForm = (WrappedComponentForm) => {
         onRatingChange={this.handleRating}
         onReviewChange={this.handleReview}
         onFormSubmit={this.handleSubmit}
+        error={this.state.error}
+        setError={this.setError}
       />;
     }
   };
