@@ -6,10 +6,6 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 class ReviewList extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
 
   componentDidMount() {
     const id = this.props.match.params.id;

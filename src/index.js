@@ -25,7 +25,6 @@ Promise.all([
   store.dispatch(DataOperation.loadOffers()),
   store.dispatch(UserOperation.checkAuthStatus())
 ])
-
   .then(() => {
 
     ReactDOM.render(

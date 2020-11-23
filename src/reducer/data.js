@@ -103,7 +103,7 @@ const ActionCreator = {
 };
 
 const Operation = {
-  loadOffers: () => (dispatch, getState, api) => {
+  loadOffers: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         const loadedOffers = response.data.map((offer) => createOffers(offer));
@@ -123,7 +123,7 @@ const Operation = {
       });
 
   },
-  checkAuthStatus: () => (dispatch, getState, api) => {
+  checkAuthStatus: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
       .then((response) => {
         dispatch(ActionCreator.setAuthInfo(response.data));
@@ -134,7 +134,7 @@ const Operation = {
 
       });
   },
-  login: (email, password) => (dispatch, getState, api) => {
+  login: (email, password) => (dispatch, _getState, api) => {
     return api.post(`/login`, {
       email,
       password,
@@ -148,7 +148,7 @@ const Operation = {
         console.error(`[LOGIN ERROR]`, error.message);
       });
   },
-  loadOfferById: (id) => (dispatch, getState, api) => {
+  loadOfferById: (id) => (dispatch, _getState, api) => {
     return api.get(`/hotels/${id}`)
       .then((response) => {
 
@@ -162,7 +162,7 @@ const Operation = {
         console.error(`[HOTELS ERROR]`, error.message);
       });
   },
-  loadCommentsByOfferId: (id) => (dispatch, getState, api) => {
+  loadCommentsByOfferId: (id) => (dispatch, _getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
         // const adapterComments = response.data.map((comment) => createComments(comment));
@@ -183,7 +183,7 @@ const Operation = {
       });
   },
 
-  loadNearPlacesId: (id) => (dispatch, getState, api) => {
+  loadNearPlacesId: (id) => (dispatch, _getState, api) => {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
 
@@ -196,7 +196,7 @@ const Operation = {
         console.error(`[HOTELS ERROR]`, error.message);
       });
   },
-  postReview: (offerId, comment, rating) => (dispatch, getState, api) => {
+  postReview: (offerId, comment, rating) => (dispatch, _getState, api) => {
     return api.post(`/comments/${offerId}`, {comment, rating})
       .then((response) => {
         const adapterComments = response.data.map((item) => createComments(item));
@@ -225,7 +225,7 @@ const Operation = {
         }
       });
   },
-  loadFavorites: () => (dispatch, getState, api) => {
+  loadFavorites: () => (dispatch, _getState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
         const loadedFavorites = response.data.map(createOffers);
