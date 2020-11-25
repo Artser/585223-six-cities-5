@@ -13,7 +13,7 @@ describe(`Render PLaceList`, () => {
     bedrooms: 1,
     city: `Amsterdam`,
     cityId: 4,
-    coord: [52.388540000000006, 4.899976],
+    coordinate: [52.388540000000006, 4.899976],
     description: `A new spacious villa, one floor.`,
     id: 5,
     images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],

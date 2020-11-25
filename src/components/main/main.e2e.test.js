@@ -2,8 +2,8 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Main} from "./main";
-import {AuthorizationStatus} from "../../reducer/user/user";
 import {PlaceListWrapped} from "./main";
+import {AuthorizationStatus} from "../../utils/functions";
 
 configure({adapter: new Adapter()});
 const offers = [
@@ -16,7 +16,7 @@ const offers = [
     type: `Apartment`,
     isPremium: true,
     rating: 80,
-    coord: [52.3909553943508, 4.85309666406198],
+    coordinate: [52.3909553943508, 4.85309666406198],
     city: `am`,
     cityId: 10,
     isFavorite: true,
@@ -31,7 +31,7 @@ const offers = [
 
 let Paris = {
   name: `2`,
-  coord: [1, 2],
+  coordinate: [1, 2],
   id: 5
 };
 

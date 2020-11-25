@@ -39,7 +39,7 @@ it(`Reducer sets loadOffers `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -63,7 +63,7 @@ it(`Reducer sets loadOffers `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -88,7 +88,7 @@ it(`Reducer sets Cities `, () => {
     payload: [{
       id: 1,
       name: `Paris`,
-      coord: [48, 52]
+      coordinate: [48, 52]
     }]
 
 
@@ -96,7 +96,7 @@ it(`Reducer sets Cities `, () => {
     cities: [{
       id: 1,
       name: `Paris`,
-      coord: [48, 52]
+      coordinate: [48, 52]
     }],
   });
 
@@ -110,7 +110,7 @@ it(`Reducer sets nearPlaces `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -134,7 +134,7 @@ it(`Reducer sets nearPlaces `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -161,7 +161,7 @@ it(`Reducer sets offer `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -185,7 +185,7 @@ it(`Reducer sets offer `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -290,7 +290,7 @@ it(`Reducer favorites `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -314,7 +314,7 @@ it(`Reducer favorites `, () => {
       bedrooms: 1,
       city: `Amsterdam`,
       cityId: 4,
-      coord: [52.388540000000006, 4.899976],
+      coordinate: [52.388540000000006, 4.899976],
       description: `A new spacious villa, one floor.`,
       id: 5,
       images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],

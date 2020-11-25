@@ -6,7 +6,7 @@ describe(`CitiesList`, () => {
   it(`CitiesList render `, () => {
     const activeCity = {
       name: `Amsterdam`,
-      coord: [54, 45],
+      coordinate: [54, 45],
       id: 2
     };
     const setCurrentCityAsActiveMock = jest.fn();

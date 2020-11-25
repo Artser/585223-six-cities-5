@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import ReviewForm from "../review-form/review-form";
 import ReviewList from "../review-list/review-list";
-import Coord from "../coord/coord";
+import Map from "../map/map";
 import PropTypes from "prop-types";
 import withReviewForm from "../../hocs/with-review-form";
 import {Operation} from "../../reducer/data";
@@ -162,13 +162,13 @@ class Offer extends PureComponent {
               </div>
             </div>
             <div style={{height: `579px`}}>
-              <Coord
+              <Map
 
 
-                coords={nearPlaces.map((nearPlace) => (nearPlace.coord))}
+                coords={nearPlaces.map((nearPlace) => (nearPlace.coordinate))}
 
 
-                activeOffer={offer.coord}
+                activeOffer={offer.coordinate}
 
               />
             </div>

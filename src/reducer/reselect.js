@@ -3,9 +3,6 @@ import {createSelector} from "reselect";
 export const getOffers = (state) => {
   return state.offers;
 };
-export const getReviews = (state) => {
-  return state.reviews;
-};
 
 export const getActiveCityId = (state) => {
   return state.activeCityId;

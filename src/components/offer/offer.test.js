@@ -5,7 +5,7 @@ import {MemoryRouter} from 'react-router-dom';
 
 jest.mock(`../review-list/review-list`, () => `ReviewList`);
 jest.mock(`../review-form/review-form`, () => `ReviewForm`);
-jest.mock(`../coord/coord`, () => `Coord`);
+jest.mock(`../map/map`, () => `Map`);
 
 describe(`Render Offer`, () => {
   const match = {params: {id: `5`}};
@@ -16,7 +16,7 @@ describe(`Render Offer`, () => {
     bedrooms: 1,
     city: `Amsterdam`,
     cityId: 4,
-    coord: [52.388540000000006, 4.899976],
+    coordinate: [52.388540000000006, 4.899976],
     description: `A new spacious villa, one floor.`,
     id: 5,
     images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -44,7 +44,7 @@ describe(`Render Offer`, () => {
   const good = `good`;
   const nearPlaces = [{
     name: `Amsterdam`,
-    coord: [54, 45],
+    coordinate: [54, 45],
     id: 2
   }];
   const img = {id: 1, picture: `picture`};

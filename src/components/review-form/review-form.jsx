@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data";
-const letterQuantity = {
+const LetterQuantity = {
   MIN: 50,
   MAX: 299,
   EMPTY: 0,
@@ -73,7 +73,7 @@ const ReviewForm = ({onRatingChange, onReviewChange, review, setReviews, id, rat
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={review.length < letterQuantity.MIN || review.length > letterQuantity.MAX || rating.length === letterQuantity.EMPTY}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={review.length < LetterQuantity.MIN || review.length > LetterQuantity.MAX || rating.length === LetterQuantity.EMPTY}>Submit</button>
       </div>
     </form>
   );

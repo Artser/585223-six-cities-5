@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const coordType = PropTypes.arrayOf(PropTypes.number).isRequired;
+export const coordsType = PropTypes.arrayOf(PropTypes.number).isRequired;
 
 export const reviewType = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -23,7 +23,7 @@ export const offerType = PropTypes.shape({
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   rating: PropTypes.number.isRequired,
-  coord: coordType,
+  coordinate: coordsType,
   description: PropTypes.string.isRequired,
   bedrooms: PropTypes.number.isRequired,
   adults: PropTypes.number.isRequired,
@@ -37,7 +37,7 @@ export const offerType = PropTypes.shape({
 
 export const cityType = PropTypes.shape({
   name: PropTypes.string.isRequired,
-  coord: coordType,
+  coordinate: coordsType,
   id: PropTypes.number.isRequired,
 
 });

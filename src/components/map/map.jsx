@@ -1,12 +1,12 @@
 import React, {PureComponent, createRef} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {coordType, cityType, offerType} from "../../types";
+import {coordsType, cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import {getActiveCity} from "../../reducer/reselect";
 
 
-const zoom = 12;
+const ZOOM = 12;
 const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
@@ -23,7 +23,7 @@ const style = {
 };
 
 
-class Coord extends PureComponent {
+class Map extends PureComponent {
   constructor(props) {
 
     super(props);
@@ -31,24 +31,24 @@ class Coord extends PureComponent {
     this._mapRef = createRef();
   }
 
-  _drawActivePin(coord) {
+  _drawActivePin(coordinate) {
     leaflet
-      .marker(coord, {icon: activeIcon, zIndexOffset: 1000})
+      .marker(coordinate, {icon: activeIcon, zIndexOffset: 1000})
       .addTo(this._map);
   }
 
   _addPinsAndCenter() {
     const {activeCity, activeOffer, coords} = this.props;
-    coords.forEach((coord) => {
+    coords.forEach((coordinate) => {
       leaflet
-        .marker(coord, {icon})
+        .marker(coordinate, {icon})
         .addTo(this._map);
     });
 
     if (activeOffer) {
       this._drawActivePin(activeOffer);
     }
-    this._map.setView(activeCity.coord, zoom);
+    this._map.setView(activeCity.coordinate, ZOOM);
   }
 
   _removePins() {
@@ -68,12 +68,12 @@ class Coord extends PureComponent {
     const {activeCity, activeOffer} = this.props;
     this._map = leaflet.map(this._mapRef.current, {
 
-      center: activeCity.coord,
-      zoom,
+      center: activeCity.coordinate,
+      ZOOM,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(activeCity.coord, zoom);
+    this._map.setView(activeCity.coordinate, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -81,9 +81,9 @@ class Coord extends PureComponent {
       })
       .addTo(this._map);
     const {coords} = this.props;
-    coords.forEach((coord) => {
+    coords.forEach((coordinate) => {
       leaflet
-        .marker(coord, {icon})
+        .marker(coordinate, {icon})
         .addTo(this._map);
     });
 
@@ -111,8 +111,8 @@ class Coord extends PureComponent {
 
   }
 }
-Coord.propTypes = {
-  coords: PropTypes.arrayOf(coordType).isRequired,
+Map.propTypes = {
+  coords: PropTypes.arrayOf(coordsType).isRequired,
   activeCity: cityType.isRequired,
   offer: offerType,
   activeOffer: PropTypes.array,
@@ -124,7 +124,7 @@ const mapStateToProps = (state) => {
     activeCity: getActiveCity(state),
   };
 };
-export {Coord};
-export default connect(mapStateToProps)(Coord);
+export {Map};
+export default connect(mapStateToProps)(Map);
 
 

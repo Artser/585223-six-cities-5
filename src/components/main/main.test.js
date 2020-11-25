@@ -5,7 +5,7 @@ import {Main} from './main';
 jest.mock(`../city-list/city-list`, () => `CitiesList`);
 jest.mock(`../sorting/sorting`, () => `Sorting`);
 jest.mock(`../place-list/place-list`, () => `PLaceList`);
-jest.mock(`../coord/coord`, () => `Coord`);
+jest.mock(`../map/map`, () => `Map`);
 jest.mock(`../no-offers/no-offers`, () => `NoOffers`);
 
 describe(`Render Main`, () => {
@@ -15,7 +15,7 @@ describe(`Render Main`, () => {
     bedrooms: 1,
     city: `Amsterdam`,
     cityId: 4,
-    coord: [52.388540000000006, 4.899976],
+    coordinate: [52.388540000000006, 4.899976],
     description: `A new spacious villa, one floor.`,
     id: 5,
     images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -32,7 +32,7 @@ describe(`Render Main`, () => {
   };
   const activeCity = {
     name: `Amsterdam`,
-    coord: [54, 45],
+    coordinate: [54, 45],
     id: 2
   };
   const authorizationStatus = `yes`;

@@ -101,7 +101,7 @@ exports[`Render Main Render Main 1`] = `
                   "bedrooms": 1,
                   "city": "Amsterdam",
                   "cityId": 4,
-                  "coord": Array [
+                  "coordinate": Array [
                     52.388540000000006,
                     4.899976,
                   ],
@@ -133,10 +133,10 @@ exports[`Render Main Render Main 1`] = `
         <div
           className="cities__right-section"
         >
-          <Coord
+          <Map
             activeCity={
               Object {
-                "coord": Array [
+                "coordinate": Array [
                   54,
                   45,
                 ],

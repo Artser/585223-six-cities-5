@@ -1,20 +1,20 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Coord} from "./coord";
+import {Map} from "./map";
 
-describe(`Render Coord`, () => {
+describe(`Render Map`, () => {
   const coords = [[48.877610000000004, 2.333499]];
   const activeCity = {
     name: `Amsterdam`,
-    coord: [54, 45],
+    coordinate: [54, 45],
     id: 2
   };
 
-  it(`Render Coord`, () => {
+  it(`Render Map`, () => {
 
     const tree = renderer
       .create(
-          <Coord
+          <Map
             coords={coords}
             activeCity={activeCity}
           />, {

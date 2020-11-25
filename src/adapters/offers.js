@@ -19,7 +19,7 @@ export const createOffers = (offer) => {
       isPremium: offer.is_premium,
       isFavorite: offer.is_favorite,
       rating: offer.rating,
-      coord: [offer.location.latitude, offer.location.longitude],
+      coordinate: [offer.location.latitude, offer.location.longitude],
       city: offer.city.name,
       cityId: getIdFromCityName(offer.city.name),
       adults: offer.max_adults,

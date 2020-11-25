@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Coord from "../coord/coord";
+import Map from "../map/map";
 import {cityType, offerType} from "../../types";
 import {connect} from "react-redux";
 import CitiesList from "../city-list/city-list";
@@ -54,10 +54,10 @@ const Main = (props) => {
 
             {isMainPageEmpty
               ? ``
-              : <Coord
-                coords={offers.map(({coord}) => coord)}
+              : <Map
+                coords={offers.map(({coordinate}) => coordinate)}
                 activeCity={activeCity}
-                activeOffer={activeOffer && activeOffer.coord}
+                activeOffer={activeOffer && activeOffer.coordinate}
               />}
 
           </div>

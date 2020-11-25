@@ -255,7 +255,7 @@ exports[`Render Offer Render Offer 1`] = `
           }
         }
       >
-        <Coord
+        <Map
           activeOffer={
             Array [
               52.388540000000006,

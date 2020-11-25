@@ -9,7 +9,7 @@ const withReviewForm = (WrappedComponentForm) => {
       super(props);
       this.state = {
         review: ``,
-        rating: `0`,
+        rating: ``,
         error: false
       };
       this.handleReview = this.handleReview.bind(this);

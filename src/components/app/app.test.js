@@ -2,8 +2,9 @@ import React from "react";
 import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
 import {createStore} from "redux";
-import {reducer} from "../../reducer/user/user";
+import {reducer} from "../../reducer/data";
 import App from "./app";
+
 
 describe(`Render App`, () => {
 
@@ -17,7 +18,7 @@ describe(`Render App`, () => {
             bedrooms: `1`,
             city: `Amsterdam`,
             cityId: 4,
-            coord: [52.388540000000006, 4.899976],
+            coordinate: [52.388540000000006, 4.899976],
             description: `A new spacious villa, one floor.`,
             id: `5`,
             images: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`],
@@ -33,7 +34,7 @@ describe(`Render App`, () => {
           cities: [{
             id: 1,
             name: `Paris`,
-            coord: [48, 52]
+            coordinate: [48, 52]
           }],
           activeCityId: 1
         }

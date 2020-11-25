@@ -165,9 +165,6 @@ const Operation = {
   loadCommentsByOfferId: (id) => (dispatch, _getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
-        // const adapterComments = response.data.map((comment) => createComments(comment));
-        // dispatch(ActionCreator.loadCommentsByOfferId(adapterComments));
-
         dispatch(
             ActionCreator.loadCommentsByOfferId(
                 response.data
